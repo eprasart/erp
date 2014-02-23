@@ -7,6 +7,7 @@ using ServiceStack.DataAnnotations;
 
 namespace ERP
 {
+    [Alias("PO_Vendor")]
     class Vendor
     {
         [PrimaryKey]
@@ -34,7 +35,10 @@ namespace ERP
             if (v.Id == 0)
                 App.db.Insert(v);
             else
+            {
+                
                 App.db.Update(v);
+            }
         }
 
         public static Vendor Select(int Id)

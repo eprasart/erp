@@ -27,8 +27,7 @@ namespace ERP
 
         private void frmVendor_Load(object sender, EventArgs e)
         {
-            Icon = Properties.Resources.Icon;
-            App.PrepareDatabase();          
+            Icon = Properties.Resources.Icon;             
             RefreshGrid();            
         }
 

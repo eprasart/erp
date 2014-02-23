@@ -29,17 +29,19 @@ namespace ERP
 
         private void frmLocationList_Load(object sender, EventArgs e)
         {
-            App.PrepareDatabase();
+            App.InitApp();
 
             Icon = Properties.Resources.Icon;
             dgvList.ShowLessColumns(true);
             RefreshGrid();
+
+            Text += " v. " + App.version;
         }
 
         private void btnNew_Click(object sender, EventArgs e)
         {
             if (bExpand)
-                imgExpand_Click(sender, e);
+                picExpand_Click(sender, e);
             txtCode.Text = "";
             txtCode.Focus();
             txtDescEN.Text = "";
@@ -50,7 +52,7 @@ namespace ERP
             txtNote.Text = "";
             Id = 0;
 
-            dgvList.Sort(colDescEN, System.ComponentModel.ListSortDirection.Ascending);
+            // dgvList.Sort(colDescEN, System.ComponentModel.ListSortDirection.Ascending);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -59,14 +61,14 @@ namespace ERP
             var m = new Location();
             m.Id = Id;
             m.Code = txtCode.Text;
-            m.Desc_EN = txtDescEN.Text;
-            m.Desc_KH = txtDescKH.Text;
-            m.Phone = txtPhone.Text;
-            m.Fax = txtFax.Text;
+            m.Desc1 = txtDescEN.Text;
+            m.Desc2 = txtDescKH.Text;
             m.Address = txtAddress.Text;
             m.Note = txtNote.Text;
             m.Status = StatusType.Active;
+            //m.Insert_At = DateTime.Now;
             LocationFacade.Save(m);
+
             RefreshGrid();
         }
 
@@ -101,10 +103,8 @@ namespace ERP
             if (Id == 0) return;
             var m = LocationFacade.Select(Id);
             txtCode.Text = m.Code;
-            txtDescEN.Text = m.Desc_EN;
-            txtDescKH.Text = m.Desc_KH;
-            txtPhone.Text = m.Phone;
-            txtFax.Text = m.Fax;
+            txtDescEN.Text = m.Desc1;
+            txtDescKH.Text = m.Desc2;
             txtAddress.Text = m.Address;
             txtNote.Text = m.Note;
         }
@@ -131,7 +131,7 @@ namespace ERP
             txtCode.Focus();
         }
 
-        private void imgExpand_Click(object sender, EventArgs e)
+        private void picExpand_Click(object sender, EventArgs e)
         {
             splitContainer1.IsSplitterFixed = !bExpand;
             if (!bExpand)
@@ -158,7 +158,13 @@ namespace ERP
 
         private void dgvList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (bExpand) picExpand_Click(sender, e);
             dgvList_SelectionChanged(sender, e);    // reload data since SelectionChanged will not occured on current row
+        }
+
+        private void frmLocationList_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            App.SaveSettings();
         }
     }
 }

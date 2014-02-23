@@ -8,20 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ERP
+namespace ERP.IC
 {
-    public partial class frmMain : Form
+    public partial class Msg : Form
     {
-        public frmMain()
+        public Msg()
         {
             InitializeComponent();
-        }
-
-        private void frmMain_Load(object sender, EventArgs e)
-        {            
-            var fVendor = new frmLocationList();
-            fVendor.Show();
-            fVendor.Focus();
         }
     }
 }

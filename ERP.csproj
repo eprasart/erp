@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -58,7 +59,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common.cs" />
+    <Compile Include="Common\Common.cs" />
+    <Compile Include="Common\Security.cs" />
+    <Compile Include="Common\Setting.cs" />
+    <Compile Include="IC\Category.cs" />
+    <Compile Include="SM\Company.cs" />
     <Compile Include="IC\Location.cs" />
     <Compile Include="IC\LocationList.cs">
       <SubType>Form</SubType>
@@ -66,13 +71,19 @@
     <Compile Include="IC\LocationList.Designer.cs">
       <DependentUpon>LocationList.cs</DependentUpon>
     </Compile>
+    <Compile Include="IC\Msg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IC\Msg.Designer.cs">
+      <DependentUpon>Msg.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="App.cs" />
+    <Compile Include="SYS\App.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -84,11 +95,15 @@
     <Compile Include="PO\VendorList.Designer.cs">
       <DependentUpon>VendorList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="SYS\Login.cs" />
+    <Compile Include="SYS\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PO\Vendor.cs" />
     <EmbeddedResource Include="IC\LocationList.resx">
       <DependentUpon>LocationList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IC\Msg.resx">
+      <DependentUpon>Msg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -101,7 +116,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config" />
+    <None Include="SYS\packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -114,7 +129,7 @@
     <None Include="Resources\Save.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="SYS\App.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\New.png" />
@@ -155,9 +170,7 @@
   <ItemGroup>
     <None Include="Resources\Icon.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Common\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
