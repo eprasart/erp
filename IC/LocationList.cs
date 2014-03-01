@@ -66,7 +66,8 @@ namespace ERP
             m.Address = txtAddress.Text;
             m.Note = txtNote.Text;
             m.Status = StatusType.Active;
-            //m.Insert_At = DateTime.Now;
+            m.Insert_By = m.Id == 0 ? Login.Username : null;
+            m.Change_By = m.Id != 0 ? Login.Username : null;
             LocationFacade.Save(m);
 
             RefreshGrid();

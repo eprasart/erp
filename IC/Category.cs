@@ -42,10 +42,14 @@ namespace ERP
         public static void Save(Location m)
         {
             if (m.Id == 0)
+            {
                 App.db.Insert(m);
+                //App.db.Insert(new Location { Code = m.Code, Status = m.Status, Insert_By = Login.Username });
+            }
             else
                 App.db.Update(m);
             System.Windows.Forms.MessageBox.Show(App.db.GetLastSql());
+
         }
 
         public static Location Select(int Id)

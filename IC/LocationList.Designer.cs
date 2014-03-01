@@ -476,6 +476,7 @@
             // 
             // txtCode
             // 
+            this.txtCode.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtCode.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCode.Location = new System.Drawing.Point(102, 34);
             this.txtCode.Name = "txtCode";
