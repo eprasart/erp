@@ -26,29 +26,29 @@ namespace ERP
         {
             SqlExpression<Vendor> e = OrmLiteConfig.DialectProvider.SqlExpression<Vendor>();
             e.Where(q => q.Status == StatusType.Active && (q.Name_EN.Contains(filter) || q.Name_KH.Contains(filter))).OrderBy(q => q.Name_EN);
-            return App.db.Select<Vendor>(e);
-            //MessageBox.Show(App.Db.GetLastSql());
+            return Database.Connection.Select<Vendor>(e);
+            //MessageBox.Show(Database.Connection.GetLastSql());
         }
 
         public static void Save(Vendor v)
         {
             if (v.Id == 0)
-                App.db.Insert(v);
+                Database.Connection.Insert(v);
             else
             {
                 
-                App.db.Update(v);
+                Database.Connection.Update(v);
             }
         }
 
         public static Vendor Select(int Id)
         {
-            return App.db.SingleById<Vendor>(Id);
+            return Database.Connection.SingleById<Vendor>(Id);
         }
 
         public static void Delete(int Id)
         {
-            App.db.UpdateOnly(new Vendor { Status = StatusType.Deleted }, p => p.Status, p => p.Id == Id);
+            Database.Connection.UpdateOnly(new Vendor { Status = StatusType.Deleted }, p => p.Status, p => p.Id == Id);
             //todo: status code in enum
         }
     }

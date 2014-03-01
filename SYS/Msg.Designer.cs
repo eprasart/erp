@@ -1,4 +1,4 @@
-﻿namespace ERP.IC
+﻿namespace ERP
 {
     partial class Msg
     {

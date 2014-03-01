@@ -60,6 +60,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Common.cs" />
+    <Compile Include="Common\Database.cs" />
+    <Compile Include="Common\Enum.cs" />
     <Compile Include="Common\Security.cs" />
     <Compile Include="Common\Setting.cs" />
     <Compile Include="IC\Category.cs" />
@@ -71,10 +73,10 @@
     <Compile Include="IC\LocationList.Designer.cs">
       <DependentUpon>LocationList.cs</DependentUpon>
     </Compile>
-    <Compile Include="IC\Msg.cs">
+    <Compile Include="SYS\Msg.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="IC\Msg.Designer.cs">
+    <Compile Include="SYS\Msg.Designer.cs">
       <DependentUpon>Msg.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
@@ -102,7 +104,7 @@
     <EmbeddedResource Include="IC\LocationList.resx">
       <DependentUpon>LocationList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="IC\Msg.resx">
+    <EmbeddedResource Include="SYS\Msg.resx">
       <DependentUpon>Msg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">

@@ -18,10 +18,5 @@ namespace ERP
         }
     }
 
-    public static class StatusType
-    {
-        public static string Active = "A";
-        public static string InActive = "I";
-        public static string Deleted = "X";
-    }
+
 }

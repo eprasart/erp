@@ -58,6 +58,7 @@ namespace ERP
         private void btnSave_Click(object sender, EventArgs e)
         {
             // TODO: Validation
+            Cursor = Cursors.WaitCursor;
             var m = new Location();
             m.Id = Id;
             m.Code = txtCode.Text;
@@ -67,10 +68,13 @@ namespace ERP
             m.Note = txtNote.Text;
             m.Status = StatusType.Active;
             m.Insert_By = m.Id == 0 ? Login.Username : null;
+            DateTime? ts = Database.GetCurrentTimeStamp();
+            m.Insert_At = m.Id == 0 ? ts : null;
             m.Change_By = m.Id != 0 ? Login.Username : null;
-            LocationFacade.Save(m);
-
+            m.Change_At = m.Id != 0 ? ts : null;
+            LocationFacade.Save(m);            
             RefreshGrid();
+            Cursor = Cursors.Default;
         }
 
         private void txtSearch_KeyDown(object sender, KeyEventArgs e)

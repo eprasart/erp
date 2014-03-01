@@ -27,10 +27,10 @@ namespace ERP
         public string Lock_By { get; set; }
         public DateTime? Lock_At { get; set; }
         public string Change_By { get; set; }
-        public DateTime? Change_At { get; set; }          
+        public DateTime? Change_At { get; set; }
     }
 
-    static class CategoryFacade
+    static class LocationFacade
     {
         public static List<Location> Select(string filter = "")
         {
@@ -38,32 +38,43 @@ namespace ERP
             e.Where(q => q.Status == StatusType.Active && (q.Code.Contains(filter) || q.Desc1.Contains(filter) || q.Desc2.Contains(filter)))
                 .OrderBy(q => q.Code);
             //System.Windows.Forms.MessageBox.Show(e.SelectExpression + "\n" + e.WhereExpression);
-            return App.db.Select<Location>(e);
+            return Database.Connection.Select<Location>(e);
 
             //);
-
         }
 
         public static void Save(Location m)
         {
+            DateTime? ts = Database.GetCurrentTimeStamp();
             if (m.Id == 0)
-                App.db.Insert(m);
+                Database.Connection.Insert(m);
             else
             {
-                //m.Change_At = "SYSDATE";
-                App.db.Update(m);
+                //Database.Connection.Update(m);
+                var mUpdate = new Location
+                {
+                    Code = m.Code,
+                    Desc1 = m.Desc1,
+                    Desc2 = m.Desc2,
+                    Address = m.Address,
+                    Note = m.Note,
+                    Change_By = m.Change_By,
+                    Change_At = m.Change_At
+                };                
+                Database.Connection.UpdateOnly(mUpdate, obj => new { obj.Code, obj.Desc1, obj.Desc2, obj.Address, obj.Note, obj.Change_By, obj.Change_At },
+                    obj => obj.Id == m.Id);
             }
+            System.Windows.Forms.MessageBox.Show(Database.Connection.GetLastSql());
         }
 
         public static Location Select(int Id)
         {
-            return App.db.SingleById<Location>(Id);
+            return Database.Connection.SingleById<Location>(Id);
         }
 
         public static void Delete(int Id)
         {
-            App.db.UpdateOnly(new Location { Status = StatusType.Deleted }, p => p.Status, p => p.Id == Id);
-            //todo: status code in enum
+            Database.Connection.UpdateOnly(new Location { Status = StatusType.Deleted }, p => p.Status, p => p.Id == Id);            
         }
     }
 }

@@ -29,37 +29,37 @@ namespace ERP
         public DateTime Change_At { get; set; }
     }
 
-    static class LocationFacade
+    static class CategoryFacade
     {
         public static List<Location> Select(string filter = "")
         {
             SqlExpression<Location> e = OrmLiteConfig.DialectProvider.SqlExpression<Location>();
             e.Where(q => q.Status == StatusType.Active && (q.Code.Contains(filter) || q.Desc1.Contains(filter) || q.Desc2.Contains(filter)))
                 .OrderBy(q => q.Code);
-            return App.db.Select<Location>(e);
+            return Database.Connection.Select<Location>(e);
         }
 
         public static void Save(Location m)
         {
             if (m.Id == 0)
             {
-                App.db.Insert(m);
-                //App.db.Insert(new Location { Code = m.Code, Status = m.Status, Insert_By = Login.Username });
+                Database.Connection.Insert(m);
+                //Database.Connection.Insert(new Location { Code = m.Code, Status = m.Status, Insert_By = Login.Username });
             }
             else
-                App.db.Update(m);
-            System.Windows.Forms.MessageBox.Show(App.db.GetLastSql());
+                Database.Connection.Update(m);
+            System.Windows.Forms.MessageBox.Show(Database.Connection.GetLastSql());
 
         }
 
         public static Location Select(int Id)
         {
-            return App.db.SingleById<Location>(Id);
+            return Database.Connection.SingleById<Location>(Id);
         }
 
         public static void Delete(int Id)
         {
-            App.db.UpdateOnly(new Location { Status = StatusType.Deleted }, p => p.Status, p => p.Id == Id);
+            Database.Connection.UpdateOnly(new Location { Status = StatusType.Deleted }, p => p.Status, p => p.Id == Id);
             //todo: status code in enum
         }
     }

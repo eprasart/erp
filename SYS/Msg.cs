@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ERP.IC
+namespace ERP
 {
     public partial class Msg : Form
     {

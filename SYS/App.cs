@@ -13,9 +13,7 @@ namespace ERP
 {
     public static class App
     {
-        public static string ConnectionString = ""; //Data Source=localhost:1521/xe;User ID=erp;Password=erp;Unicode=True";
-        public static OrmLiteConnectionFactory dbFactory = null;
-        public static IDbConnection db = null;
+       
 
         public static Setting setting = new Setting();
         public static String version;
@@ -24,9 +22,9 @@ namespace ERP
         {
             LoadSettings();
             try
-            {                             
-                dbFactory = new OrmLiteConnectionFactory(ConnectionString, OracleDialect.Provider);
-                db = dbFactory.OpenDbConnection();
+            {
+                Database.Factory = new OrmLiteConnectionFactory(Database.ConnectionString, OracleDialect.Provider);
+                Database.Connection = Database.Factory.OpenDbConnection();
             }
             catch (Exception ex)
             {
@@ -34,7 +32,7 @@ namespace ERP
                 Application.Exit();
                 return;
             }
-            PrepareDatabase();
+            Database.PrepareDatabase();
             SetVersion();
 
             Login.Company_Id = 1;
@@ -46,17 +44,12 @@ namespace ERP
             version = Common.RemoveLastDotZero( Assembly.GetEntryAssembly().GetName().Version.ToString());
         }
 
-        public static void PrepareDatabase()
-        {
-            db.CreateTableIfNotExists(typeof(Category), typeof(Vendor), typeof(Location));
-            //db.CreateTableIfNotExists<Vendor>();
-            //db.CreateTableIfNotExists<Location>();
-        }
+  
 
         public static void LoadSettings()
         {
             setting.Path = Path.Combine(Application.StartupPath, "setting.ini");
-            ConnectionString = setting.Get("ConnectionString", @"Data Source=localhost:1521/xe;User ID=erp;Password=erp;Unicode=True");
+            Database.ConnectionString = setting.Get("ConnectionString", @"Data Source=localhost:1521/xe;User ID=erp;Password=erp;Unicode=True");
         }
 
         public static void SaveSettings()
