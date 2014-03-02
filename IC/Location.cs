@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using ServiceStack.OrmLite;
 using ServiceStack.DataAnnotations;
+using System.Linq;
 
 
 namespace ERP
@@ -18,14 +19,15 @@ namespace ERP
         public string Desc1 { get; set; }
         public string Desc2 { get; set; }
         public string Address { get; set; }
-        [StringLength(1)]
-        public String Status { get; set; }
         [StringLength(2000)]
         public string Note { get; set; }
-        public string Insert_By { get; set; }
-        public DateTime? Insert_At { get; set; }
+        public String Status { get; set; }
+        [StringLength(1)]
         public string Lock_By { get; set; }
         public DateTime? Lock_At { get; set; }
+        public string Insert_By { get; set; }
+        [Default(typeof(DateTime), "CURRENT_TIMESTAMP")]
+        public DateTime? Insert_At { get; set; }
         public string Change_By { get; set; }
         public DateTime? Change_At { get; set; }
     }
@@ -46,23 +48,30 @@ namespace ERP
         public static void Save(Location m)
         {
             DateTime? ts = Database.GetCurrentTimeStamp();
+            var mSave = new Location
+            {
+                Code = m.Code,
+                Desc1 = m.Desc1,
+                Desc2 = m.Desc2,
+                Address = m.Address,
+                Note = m.Note,
+            };
             if (m.Id == 0)
-                Database.Connection.Insert(m);
+            {
+                mSave.Status = StatusType.Active;
+                mSave.Insert_By = Login.Username;
+                mSave.Insert_At = ts;
+                var Id = (int)Database.Connection.Insert(mSave, true);
+                //Database.Connection.Update<Location>( set: "Insert_At = {0}".Params("CURRENT_TIMESTAMP"), where: "Id = {0}".Params(Id));
+                //Database.Connection.InsertOnly(mSave, ev => ev.Insert(p => new { p.Code, p.Desc1, p.Desc2, p.Address, p.Note, p.Status, p.Insert_By, p.Insert_At }));
+            }
             else
             {
-                //Database.Connection.Update(m);
-                var mUpdate = new Location
-                {
-                    Code = m.Code,
-                    Desc1 = m.Desc1,
-                    Desc2 = m.Desc2,
-                    Address = m.Address,
-                    Note = m.Note,
-                    Change_By = m.Change_By,
-                    Change_At = m.Change_At
-                };                
-                Database.Connection.UpdateOnly(mUpdate, obj => new { obj.Code, obj.Desc1, obj.Desc2, obj.Address, obj.Note, obj.Change_By, obj.Change_At },
-                    obj => obj.Id == m.Id);
+                mSave.Change_By = Login.Username;
+                mSave.Change_At = ts;
+                Database.Connection.UpdateOnly(mSave, p => new { p.Code, p.Desc1, p.Desc2, p.Address, p.Note, p.Change_By, p.Change_At },
+                    p => p.Id == m.Id);
+                Database.Connection.Delete<Location>(where: "Age = {0}".Params(27));
             }
             System.Windows.Forms.MessageBox.Show(Database.Connection.GetLastSql());
         }
@@ -74,7 +83,7 @@ namespace ERP
 
         public static void Delete(int Id)
         {
-            Database.Connection.UpdateOnly(new Location { Status = StatusType.Deleted }, p => p.Status, p => p.Id == Id);            
+            Database.Connection.UpdateOnly(new Location { Status = StatusType.Deleted }, p => p.Status, p => p.Id == Id);
         }
     }
 }

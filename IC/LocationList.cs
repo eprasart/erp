@@ -66,13 +66,7 @@ namespace ERP
             m.Desc2 = txtDescKH.Text;
             m.Address = txtAddress.Text;
             m.Note = txtNote.Text;
-            m.Status = StatusType.Active;
-            m.Insert_By = m.Id == 0 ? Login.Username : null;
-            DateTime? ts = Database.GetCurrentTimeStamp();
-            m.Insert_At = m.Id == 0 ? ts : null;
-            m.Change_By = m.Id != 0 ? Login.Username : null;
-            m.Change_At = m.Id != 0 ? ts : null;
-            LocationFacade.Save(m);            
+            LocationFacade.Save(m);
             RefreshGrid();
             Cursor = Cursors.Default;
         }
