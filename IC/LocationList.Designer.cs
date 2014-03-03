@@ -61,7 +61,6 @@
             this.txtNote = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.txtAddress = new System.Windows.Forms.TextBox();
-            this.groupLabel2 = new Kredit.UI.GroupLabel();
             this.groupLabel3 = new Kredit.UI.GroupLabel();
             this.groupLabel1 = new Kredit.UI.GroupLabel();
             this.txtDescKH = new Kredit.UI.TextBox(this.components);
@@ -75,6 +74,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.groupLabel4 = new Kredit.UI.GroupLabel();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -188,9 +188,9 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.groupLabel4);
             this.splitContainer1.Panel2.Controls.Add(this.txtNote);
             this.splitContainer1.Panel2.Controls.Add(this.txtAddress);
-            this.splitContainer1.Panel2.Controls.Add(this.groupLabel2);
             this.splitContainer1.Panel2.Controls.Add(this.groupLabel3);
             this.splitContainer1.Panel2.Controls.Add(this.groupLabel1);
             this.splitContainer1.Panel2.Controls.Add(this.txtDescKH);
@@ -413,32 +413,21 @@
             this.txtAddress.Size = new System.Drawing.Size(200, 34);
             this.txtAddress.TabIndex = 6;
             // 
-            // groupLabel2
-            // 
-            this.groupLabel2.Caption = "Contact";
-            this.groupLabel2.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupLabel2.Location = new System.Drawing.Point(356, 12);
-            this.groupLabel2.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
-            this.groupLabel2.Name = "groupLabel2";
-            this.groupLabel2.Size = new System.Drawing.Size(255, 16);
-            this.groupLabel2.TabIndex = 4;
-            this.groupLabel2.TabStop = false;
-            // 
             // groupLabel3
             // 
             this.groupLabel3.Caption = "Note";
-            this.groupLabel3.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupLabel3.Location = new System.Drawing.Point(9, 148);
+            this.groupLabel3.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupLabel3.Location = new System.Drawing.Point(10, 148);
             this.groupLabel3.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
             this.groupLabel3.Name = "groupLabel3";
-            this.groupLabel3.Size = new System.Drawing.Size(599, 16);
+            this.groupLabel3.Size = new System.Drawing.Size(699, 16);
             this.groupLabel3.TabIndex = 4;
             this.groupLabel3.TabStop = false;
             // 
             // groupLabel1
             // 
             this.groupLabel1.Caption = "General";
-            this.groupLabel1.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupLabel1.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupLabel1.Location = new System.Drawing.Point(9, 12);
             this.groupLabel1.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
             this.groupLabel1.Name = "groupLabel1";
@@ -552,6 +541,17 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Description (EN)";
             // 
+            // groupLabel4
+            // 
+            this.groupLabel4.Caption = "Contact";
+            this.groupLabel4.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupLabel4.Location = new System.Drawing.Point(356, 5);
+            this.groupLabel4.Margin = new System.Windows.Forms.Padding(3, 15, 3, 5);
+            this.groupLabel4.Name = "groupLabel4";
+            this.groupLabel4.Size = new System.Drawing.Size(255, 27);
+            this.groupLabel4.TabIndex = 8;
+            this.groupLabel4.TabStop = false;
+            // 
             // frmLocationList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -614,7 +614,6 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
-        private Kredit.UI.GroupLabel groupLabel2;
         private Kredit.UI.TextBox txtFax;
         private System.Windows.Forms.Label label14;
         private Kredit.UI.TextBox txtPhone;
@@ -625,7 +624,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;        
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private Kredit.UI.GroupLabel groupLabel4;        
     }
 }
 

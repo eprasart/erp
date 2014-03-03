@@ -71,7 +71,7 @@ namespace ERP
                 mSave.Change_At = ts;
                 Database.Connection.UpdateOnly(mSave, p => new { p.Code, p.Desc1, p.Desc2, p.Address, p.Note, p.Change_By, p.Change_At },
                     p => p.Id == m.Id);
-                Database.Connection.Delete<Location>(where: "Age = {0}".Params(27));
+                //Database.Connection.Delete<Location>(where: "Age = {0}".Params(27));
             }
             System.Windows.Forms.MessageBox.Show(Database.Connection.GetLastSql());
         }
