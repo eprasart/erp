@@ -61,7 +61,7 @@ namespace ERP
                 mSave.Status = StatusType.Active;
                 mSave.Insert_By = Login.Username;
                 mSave.Insert_At = ts;
-                var Id = (int)Database.Connection.Insert(mSave, true);
+                Database.Connection.Insert(mSave);
                 //Database.Connection.Update<Location>( set: "Insert_At = {0}".Params("CURRENT_TIMESTAMP"), where: "Id = {0}".Params(Id));
                 //Database.Connection.InsertOnly(mSave, ev => ev.Insert(p => new { p.Code, p.Desc1, p.Desc2, p.Address, p.Note, p.Status, p.Insert_By, p.Insert_At }));
             }
@@ -73,7 +73,7 @@ namespace ERP
                     p => p.Id == m.Id);
                 //Database.Connection.Delete<Location>(where: "Age = {0}".Params(27));
             }
-            System.Windows.Forms.MessageBox.Show(Database.Connection.GetLastSql());
+            //System.Windows.Forms.MessageBox.Show(Database.Connection.GetLastSql());
         }
 
         public static Location Select(int Id)
