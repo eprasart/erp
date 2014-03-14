@@ -45,19 +45,13 @@
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgvList = new Kredit.UI.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDescEN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.imgExpand = new System.Windows.Forms.PictureBox();
             this.lblClear = new System.Windows.Forms.LinkLabel();
             this.lblRefresh = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
             this.txtSearch = new Kredit.UI.TextBox(this.components);
+            this.groupLabel4 = new Kredit.UI.GroupLabel();
             this.txtNote = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.txtAddress = new System.Windows.Forms.TextBox();
@@ -74,7 +68,13 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.groupLabel4 = new Kredit.UI.GroupLabel();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDesc1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -223,12 +223,12 @@
             this.dgvList.BackgroundColor = System.Drawing.Color.White;
             this.dgvList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvList.Column1 = "colCode";
-            this.dgvList.Column2 = "colDescEN";
+            this.dgvList.Column2 = "colDesc1";
             this.dgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.colCode,
-            this.colDescEN,
+            this.colDesc1,
             this.Column4,
             this.Column5,
             this.Column6,
@@ -252,62 +252,6 @@
             this.dgvList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellDoubleClick);
             this.dgvList.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvList_DataBindingComplete);
             this.dgvList.SelectionChanged += new System.EventHandler(this.dgvList_SelectionChanged);
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "Id";
-            this.Column1.HeaderText = "Id";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Visible = false;
-            // 
-            // colCode
-            // 
-            this.colCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colCode.DataPropertyName = "Code";
-            this.colCode.HeaderText = "Code";
-            this.colCode.Name = "colCode";
-            this.colCode.ReadOnly = true;
-            this.colCode.Width = 57;
-            // 
-            // colDescEN
-            // 
-            this.colDescEN.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colDescEN.DataPropertyName = "Desc_EN";
-            this.colDescEN.HeaderText = "Description (EN)";
-            this.colDescEN.Name = "colDescEN";
-            this.colDescEN.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            this.Column4.DataPropertyName = "Desc_KH";
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Column4.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Column4.HeaderText = "Description (KH)";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            // 
-            // Column5
-            // 
-            this.Column5.DataPropertyName = "Phone";
-            this.Column5.HeaderText = "Phone";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            // 
-            // Column6
-            // 
-            this.Column6.DataPropertyName = "Fax";
-            this.Column6.HeaderText = "Fax";
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            // 
-            // Column7
-            // 
-            this.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column7.DataPropertyName = "Address";
-            this.Column7.HeaderText = "Address";
-            this.Column7.Name = "Column7";
-            this.Column7.ReadOnly = true;
             // 
             // panel1
             // 
@@ -388,6 +332,17 @@
             this.txtSearch.TabIndex = 3;
             this.txtSearch.TabOnEnter = true;
             this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
+            // 
+            // groupLabel4
+            // 
+            this.groupLabel4.Caption = "Contact";
+            this.groupLabel4.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupLabel4.Location = new System.Drawing.Point(356, 5);
+            this.groupLabel4.Margin = new System.Windows.Forms.Padding(3, 15, 3, 5);
+            this.groupLabel4.Name = "groupLabel4";
+            this.groupLabel4.Size = new System.Drawing.Size(255, 27);
+            this.groupLabel4.TabIndex = 8;
+            this.groupLabel4.TabStop = false;
             // 
             // txtNote
             // 
@@ -541,16 +496,61 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Description (EN)";
             // 
-            // groupLabel4
+            // Column1
             // 
-            this.groupLabel4.Caption = "Contact";
-            this.groupLabel4.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupLabel4.Location = new System.Drawing.Point(356, 5);
-            this.groupLabel4.Margin = new System.Windows.Forms.Padding(3, 15, 3, 5);
-            this.groupLabel4.Name = "groupLabel4";
-            this.groupLabel4.Size = new System.Drawing.Size(255, 27);
-            this.groupLabel4.TabIndex = 8;
-            this.groupLabel4.TabStop = false;
+            this.Column1.DataPropertyName = "Id";
+            this.Column1.HeaderText = "Id";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Visible = false;
+            // 
+            // colCode
+            // 
+            this.colCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colCode.DataPropertyName = "Code";
+            this.colCode.HeaderText = "Code";
+            this.colCode.Name = "colCode";
+            this.colCode.ReadOnly = true;
+            this.colCode.Width = 57;
+            // 
+            // colDesc1
+            // 
+            this.colDesc1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDesc1.DataPropertyName = "Desc1";
+            this.colDesc1.HeaderText = "Description 1";
+            this.colDesc1.Name = "colDesc1";
+            this.colDesc1.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "Desc2";
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Column4.DefaultCellStyle = dataGridViewCellStyle2;
+            this.Column4.HeaderText = "Description 2";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            // 
+            // Column5
+            // 
+            this.Column5.DataPropertyName = "Phone";
+            this.Column5.HeaderText = "Phone";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            // 
+            // Column6
+            // 
+            this.Column6.DataPropertyName = "Fax";
+            this.Column6.HeaderText = "Fax";
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            // 
+            // Column7
+            // 
+            this.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column7.DataPropertyName = "Address";
+            this.Column7.HeaderText = "Address";
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
             // 
             // frmLocationList
             // 
@@ -618,14 +618,14 @@
         private System.Windows.Forms.Label label14;
         private Kredit.UI.TextBox txtPhone;
         private System.Windows.Forms.Label label11;
+        private Kredit.UI.GroupLabel groupLabel4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDescEN;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDesc1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private Kredit.UI.GroupLabel groupLabel4;        
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;        
     }
 }
 
