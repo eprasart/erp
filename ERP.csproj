@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Basic.cs" />
     <Compile Include="Common\Common.cs" />
     <Compile Include="Common\Database.cs" />
     <Compile Include="Common\Enum.cs" />

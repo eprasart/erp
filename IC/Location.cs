@@ -21,8 +21,9 @@ namespace ERP
         public string Address { get; set; }
         [StringLength(2000)]
         public string Note { get; set; }
-        public String Status { get; set; }
         [StringLength(1)]
+        //[Default(typeof(string), "A")]
+        public String Status { get; set; }
         public string Lock_By { get; set; }
         public DateTime? Lock_At { get; set; }
         public string Insert_By { get; set; }
