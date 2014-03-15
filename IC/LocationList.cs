@@ -119,7 +119,7 @@ namespace ERP
             var Id = dgvList.Id;
             if (Id == 0) return;
             if (MessageBox.Show("Are you sure you want to delete?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.No) return;
-            LocationFacade.Delete(Id);
+            LocationFacade.SetStatus(Id, StatusType.Deleted);
             RefreshGrid();
             if (dgvList.RowCount == 0) btnNew_Click(sender, e);
         }
@@ -164,6 +164,15 @@ namespace ERP
         private void frmLocationList_FormClosed(object sender, FormClosedEventArgs e)
         {
             App.SaveSettings();
+        }
+
+        private void btnActive_Click(object sender, EventArgs e)
+        {
+            var Id = dgvList.Id;
+            if (Id == 0) return;            
+            //todo: if A else I
+            LocationFacade.SetStatus(Id, StatusType.InActive);
+            RefreshGrid();            
         }
     }
 }

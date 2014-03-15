@@ -82,9 +82,9 @@ namespace ERP
             return Database.Connection.SingleById<Location>(Id);
         }
 
-        public static void Delete(int Id)
+        public static void SetStatus(int Id, string s)
         {
-            Database.Connection.UpdateOnly(new Location { Status = StatusType.Deleted }, p => p.Status, p => p.Id == Id);
+            Database.Connection.UpdateOnly(new Location { Status = s }, p => p.Status, p => p.Id == Id);
         }
     }
 }
