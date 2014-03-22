@@ -23,7 +23,7 @@ namespace ERP
             LoadSettings();
             try
             {
-                Database.Factory = new OrmLiteConnectionFactory(Database.ConnectionString, OracleDialect.Provider);
+                Database.Factory = new OrmLiteConnectionFactory(Database.ConnectionString, PostgreSqlDialect.Provider);
                 Database.Connection = Database.Factory.OpenDbConnection();
             }
             catch (Exception ex)
@@ -49,7 +49,7 @@ namespace ERP
         public static void LoadSettings()
         {
             setting.Path = Path.Combine(Application.StartupPath, "setting.ini");
-            Database.ConnectionString = setting.Get("ConnectionString", @"Data Source=localhost:1521/xe;User ID=erp;Password=erp;Unicode=True");
+            Database.ConnectionString = setting.Get("ConnectionString", @"server=localhost;database=erp;uid=erp;pwd=erp");
         }
 
         public static void SaveSettings()

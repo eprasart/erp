@@ -8,12 +8,12 @@ using System.Linq;
 
 namespace ERP
 {
-    [Alias("IC_Location")]
+    [Alias("IcLocation")]
     class Location
     {
         [AutoIncrement]
         public int Id { get; set; }
-        public int Company_Id { get; set; }
+        public int CompanyId { get; set; }
         [Required]
         public string Code { get; set; }
         public string Desc1 { get; set; }
@@ -24,13 +24,13 @@ namespace ERP
         [StringLength(1)]
         //[Default(typeof(string), "A")]
         public String Status { get; set; }
-        public string Lock_By { get; set; }
-        public DateTime? Lock_At { get; set; }
-        public string Insert_By { get; set; }
+        public string LockBy { get; set; }
+        public DateTime? LockAt { get; set; }
+        public string InsertBy { get; set; }
         [Default(typeof(DateTime), "CURRENT_TIMESTAMP")]
-        public DateTime? Insert_At { get; set; }
-        public string Change_By { get; set; }
-        public DateTime? Change_At { get; set; }
+        public DateTime? InsertAt { get; set; }
+        public string ChangeBy { get; set; }
+        public DateTime? ChangeAt { get; set; }
     }
 
     static class LocationFacade
@@ -60,17 +60,17 @@ namespace ERP
             if (m.Id == 0)
             {
                 mSave.Status = StatusType.Active;
-                mSave.Insert_By = Login.Username;
-                mSave.Insert_At = ts;
+                mSave.InsertBy = Login.Username;
+                mSave.InsertAt = ts;
                 Database.Connection.Insert(mSave);
                 //Database.Connection.Update<Location>( set: "Insert_At = {0}".Params("CURRENT_TIMESTAMP"), where: "Id = {0}".Params(Id));
                 //Database.Connection.InsertOnly(mSave, ev => ev.Insert(p => new { p.Code, p.Desc1, p.Desc2, p.Address, p.Note, p.Status, p.Insert_By, p.Insert_At }));
             }
             else
             {
-                mSave.Change_By = Login.Username;
-                mSave.Change_At = ts;
-                Database.Connection.UpdateOnly(mSave, p => new { p.Code, p.Desc1, p.Desc2, p.Address, p.Note, p.Change_By, p.Change_At },
+                mSave.ChangeBy = Login.Username;
+                mSave.ChangeAt = ts;
+                Database.Connection.UpdateOnly(mSave, p => new { p.Code, p.Desc1, p.Desc2, p.Address, p.Note, Change_By = p.ChangeBy, Change_At = p.ChangeAt },
                     p => p.Id == m.Id);
                 //Database.Connection.Delete<Location>(where: "Age = {0}".Params(27));
             }
