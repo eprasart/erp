@@ -13,7 +13,7 @@ namespace ERP
 {
     public static class App
     {
-       
+
 
         public static Setting setting = new Setting();
         public static String version;
@@ -41,10 +41,8 @@ namespace ERP
 
         private static void SetVersion()
         {
-            version = Common.RemoveLastDotZero( Assembly.GetEntryAssembly().GetName().Version.ToString());
+            version = Common.RemoveLastDotZero(Assembly.GetEntryAssembly().GetName().Version.ToString());
         }
-
-  
 
         public static void LoadSettings()
         {

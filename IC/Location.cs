@@ -18,16 +18,13 @@ namespace ERP
         public string Code { get; set; }
         public string Desc1 { get; set; }
         public string Desc2 { get; set; }
-        public string Address { get; set; }
-        [StringLength(2000)]
-        public string Note { get; set; }
-        [StringLength(1)]
-        //[Default(typeof(string), "A")]
+        public string Address { get; set; }        
+        public string Note { get; set; }        
         public String Status { get; set; }
         public string LockBy { get; set; }
         public DateTime? LockAt { get; set; }
         public string InsertBy { get; set; }
-        [Default(typeof(DateTime), "CURRENT_TIMESTAMP")]
+        [Default(typeof(DateTime), "now()")]
         public DateTime? InsertAt { get; set; }
         public string ChangeBy { get; set; }
         public DateTime? ChangeAt { get; set; }
@@ -63,14 +60,14 @@ namespace ERP
                 mSave.InsertBy = Login.Username;
                 mSave.InsertAt = ts;
                 Database.Connection.Insert(mSave);
-                //Database.Connection.Update<Location>( set: "Insert_At = {0}".Params("CURRENT_TIMESTAMP"), where: "Id = {0}".Params(Id));
-                //Database.Connection.InsertOnly(mSave, ev => ev.Insert(p => new { p.Code, p.Desc1, p.Desc2, p.Address, p.Note, p.Status, p.Insert_By, p.Insert_At }));
+                //Database.Connection.Update<Location>( set: "Insert_At = {0}".Params("CURRENT_TIMESTAMP"), where: "Id = {0}".Params(Id));                
+                //Database.Connection.InsertOnly(new Location { Code = mSave.Code, Desc1 = mSave.Desc1, ChangeAt = ts }, ev => ev.Insert(p => new { p.Code, p.Desc1 }));
             }
             else
             {
                 mSave.ChangeBy = Login.Username;
                 mSave.ChangeAt = ts;
-                Database.Connection.UpdateOnly(mSave, p => new { p.Code, p.Desc1, p.Desc2, p.Address, p.Note, Change_By = p.ChangeBy, Change_At = p.ChangeAt },
+                Database.Connection.UpdateOnly(mSave, p => new { p.Code, p.Desc1, p.Desc2, p.Address, p.Note, ChangeBy = p.ChangeBy, ChangeAt = p.ChangeAt },
                     p => p.Id == m.Id);
                 //Database.Connection.Delete<Location>(where: "Age = {0}".Params(27));
             }

@@ -23,7 +23,7 @@ namespace ERP
 
         public static DateTime GetCurrentTimeStamp()
         {
-            return Connection.Scalar <DateTime>("SELECT now()");
+            return Connection.Scalar <DateTime>("select now()");
         }
     }
 }
