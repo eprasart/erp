@@ -174,5 +174,10 @@ namespace ERP
             LocationFacade.SetStatus(Id, StatusType.InActive);
             RefreshGrid();            
         }
+
+        private void dgvList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

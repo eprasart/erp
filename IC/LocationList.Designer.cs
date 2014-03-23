@@ -30,8 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLocationList));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnNew = new System.Windows.Forms.ToolStripButton();
             this.btnCopy = new System.Windows.Forms.ToolStripButton();
@@ -43,13 +45,6 @@
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgvList = new Kredit.UI.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDesc1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.imgExpand = new System.Windows.Forms.PictureBox();
             this.lblClear = new System.Windows.Forms.LinkLabel();
@@ -73,6 +68,13 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDesc1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -209,8 +211,8 @@
             this.dgvList.AllowUserToAddRows = false;
             this.dgvList.AllowUserToDeleteRows = false;
             this.dgvList.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Honeydew;
-            this.dgvList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Honeydew;
+            this.dgvList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -227,14 +229,14 @@
             this.Column5,
             this.Column6,
             this.Column7});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvList.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvList.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvList.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.dgvList.Location = new System.Drawing.Point(3, 56);
             this.dgvList.Name = "dgvList";
@@ -243,63 +245,10 @@
             this.dgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvList.Size = new System.Drawing.Size(296, 436);
             this.dgvList.TabIndex = 0;
+            this.dgvList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellContentClick);
             this.dgvList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellDoubleClick);
             this.dgvList.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dgvList_DataBindingComplete);
             this.dgvList.SelectionChanged += new System.EventHandler(this.dgvList_SelectionChanged);
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "Id";
-            this.Column1.HeaderText = "Id";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Visible = false;
-            // 
-            // colCode
-            // 
-            this.colCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colCode.DataPropertyName = "Code";
-            this.colCode.HeaderText = "Code";
-            this.colCode.Name = "colCode";
-            this.colCode.ReadOnly = true;
-            this.colCode.Width = 57;
-            // 
-            // colDesc1
-            // 
-            this.colDesc1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colDesc1.DataPropertyName = "Desc_EN";
-            this.colDesc1.HeaderText = "Description (EN)";
-            this.colDesc1.Name = "colDesc1";
-            this.colDesc1.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            this.Column4.DataPropertyName = "Desc_KH";
-            this.Column4.HeaderText = "Description (KH)";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            // 
-            // Column5
-            // 
-            this.Column5.DataPropertyName = "Phone";
-            this.Column5.HeaderText = "Phone";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            // 
-            // Column6
-            // 
-            this.Column6.DataPropertyName = "Fax";
-            this.Column6.HeaderText = "Fax";
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            // 
-            // Column7
-            // 
-            this.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column7.DataPropertyName = "Address";
-            this.Column7.HeaderText = "Address";
-            this.Column7.Name = "Column7";
-            this.Column7.ReadOnly = true;
             // 
             // panel1
             // 
@@ -543,6 +492,64 @@
             this.label1.Size = new System.Drawing.Size(89, 22);
             this.label1.TabIndex = 0;
             this.label1.Text = "Description (EN)";
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "Id";
+            this.Column1.HeaderText = "Id";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Visible = false;
+            // 
+            // colCode
+            // 
+            this.colCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colCode.DataPropertyName = "Code";
+            this.colCode.HeaderText = "Code";
+            this.colCode.Name = "colCode";
+            this.colCode.ReadOnly = true;
+            this.colCode.Width = 57;
+            // 
+            // colDesc1
+            // 
+            this.colDesc1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDesc1.DataPropertyName = "Desc1";
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.colDesc1.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colDesc1.HeaderText = "Description";
+            this.colDesc1.Name = "colDesc1";
+            this.colDesc1.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "Desc2";
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Column4.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Column4.HeaderText = "Description 2";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            // 
+            // Column5
+            // 
+            this.Column5.DataPropertyName = "Phone";
+            this.Column5.HeaderText = "Phone";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            // 
+            // Column6
+            // 
+            this.Column6.DataPropertyName = "Fax";
+            this.Column6.HeaderText = "Fax";
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            // 
+            // Column7
+            // 
+            this.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column7.DataPropertyName = "Address";
+            this.Column7.HeaderText = "Address";
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
             // 
             // frmLocationList
             // 
