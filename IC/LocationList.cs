@@ -179,5 +179,13 @@ namespace ERP
         {
 
         }
+
+        private void btnUnlock_Click(object sender, EventArgs e)
+        {
+            foreach (var c in splitContainer1.Panel2.Controls)
+            {
+                if (c.GetType() ==    
+            }
+        }
     }
 }
