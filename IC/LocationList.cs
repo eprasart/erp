@@ -27,6 +27,17 @@ namespace ERP
 
         }
 
+        private void LockControls(bool l =true)
+        {            
+            foreach (Control c in splitContainer1.Panel2.Controls)
+            {
+                if (c is TextBox)
+                    ((TextBox)c).ReadOnly = l;
+                else if (c is ComboBox)
+                    ((ComboBox)c).Enabled = !l;
+            }            
+        }
+
         private void frmLocationList_Load(object sender, EventArgs e)
         {
             App.InitApp();
@@ -36,6 +47,8 @@ namespace ERP
             RefreshGrid();
 
             Text += " v. " + App.version;
+
+            LockControls();
         }
 
         private void btnNew_Click(object sender, EventArgs e)
@@ -51,7 +64,7 @@ namespace ERP
             txtAddress.Text = "";
             txtNote.Text = "";
             Id = 0;
-
+            LockControls(false);
             // dgvList.Sort(colDescEN, System.ComponentModel.ListSortDirection.Ascending);
         }
 
@@ -68,6 +81,7 @@ namespace ERP
             m.Note = txtNote.Text;
             LocationFacade.Save(m);
             RefreshGrid();
+            LockControls();
             Cursor = Cursors.Default;
         }
 
@@ -106,6 +120,8 @@ namespace ERP
             txtDescKH.Text = m.Desc2;
             txtAddress.Text = m.Address;
             txtNote.Text = m.Note;
+
+            LockControls();
         }
 
         private void btnSaveNew_Click(object sender, EventArgs e)
@@ -149,12 +165,6 @@ namespace ERP
             bExpand = !bExpand;
         }
 
-        private void dgvList_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            //foreach (DataGridViewColumn column in dgvList.Columns)
-            //    column.SortMode = DataGridViewColumnSortMode.Automatic;
-        }
-
         private void dgvList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (bExpand) picExpand_Click(sender, e);
@@ -169,23 +179,15 @@ namespace ERP
         private void btnActive_Click(object sender, EventArgs e)
         {
             var Id = dgvList.Id;
-            if (Id == 0) return;            
+            if (Id == 0) return;
             //todo: if A else I
             LocationFacade.SetStatus(Id, StatusType.InActive);
-            RefreshGrid();            
-        }
-
-        private void dgvList_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            RefreshGrid();
         }
 
         private void btnUnlock_Click(object sender, EventArgs e)
         {
-            foreach (var c in splitContainer1.Panel2.Controls)
-            {
-                if (c.GetType() ==    
-            }
+            LockControls(false);
         }
     }
 }
