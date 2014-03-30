@@ -18,8 +18,8 @@ namespace ERP
         public string Code { get; set; }
         public string Desc1 { get; set; }
         public string Desc2 { get; set; }
-        public string Address { get; set; }        
-        public string Note { get; set; }        
+        public string Address { get; set; }
+        public string Note { get; set; }
         public String Status { get; set; }
         public string LockBy { get; set; }
         public DateTime? LockAt { get; set; }
@@ -82,6 +82,23 @@ namespace ERP
         public static void SetStatus(int Id, string s)
         {
             Database.Connection.UpdateOnly(new Location { Status = s }, p => p.Status, p => p.Id == Id);
+        }
+
+        public static bool IsLocked(int Id)
+        {
+            return Database.Connection.Exists<Location>("Id = @Id and Lock_By = @LockBy", new { Id = Id, LockBy = Login.Username });
+        }
+
+        public static Lock GetLockInfo(int Id)
+        {
+            var l = new Lock();
+            Database.Connection.select
+        }
+
+        public static void LockRecord(int Id)
+        {
+            DateTime ts = Database.GetCurrentTimeStamp();
+            Database.Connection.UpdateOnly(new Location { LockBy = Login.Username, LockAt = ts }, p => new { p.LockBy, p.LockAt }, p => p.Id == Id);
         }
     }
 }

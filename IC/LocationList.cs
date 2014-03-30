@@ -188,6 +188,12 @@ namespace ERP
         private void btnUnlock_Click(object sender, EventArgs e)
         {
             LockControls(false);
+            if (LocationFacade.IsLocked(dgvList.Id))    // Check if record is locked
+            {
+                MessageBox.Show("Account is locked.");
+                return;
+            }
+            LocationFacade.LockRecord(dgvList.Id);
         }
     }
 }
