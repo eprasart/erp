@@ -27,15 +27,24 @@ namespace ERP
 
         }
 
-        private void LockControls(bool l =true)
-        {            
+        private void LockControls(bool l = true)
+        {
             foreach (Control c in splitContainer1.Panel2.Controls)
             {
                 if (c is TextBox)
                     ((TextBox)c).ReadOnly = l;
                 else if (c is ComboBox)
                     ((ComboBox)c).Enabled = !l;
-            }            
+            }
+            btnNew.Enabled = l;
+            btnCopy.Enabled = l;
+            //btnUnlock.Enabled = !l;
+            btnSave.Enabled = !l;
+            btnSaveNew.Enabled = !l;
+            btnActive.Enabled = l;
+            btnDelete.Enabled = l;
+            splitContainer1.Panel1.Enabled = l;
+            btnUnlock.Text = l ? "Un&lock" : "Cance&l";
         }
 
         private void frmLocationList_Load(object sender, EventArgs e)
@@ -187,13 +196,26 @@ namespace ERP
 
         private void btnUnlock_Click(object sender, EventArgs e)
         {
-            LockControls(false);
-            if (LocationFacade.IsLocked(dgvList.Id))    // Check if record is locked
+            // Cancel
+            if (btnUnlock.Text == "Cance&l")
             {
-                MessageBox.Show("Account is locked.");
+                LockControls(true);
+                LocationFacade.ReleaseLock(dgvList.Id);
                 return;
             }
-            LocationFacade.LockRecord(dgvList.Id);
+
+            // Unlock
+            var lInfo = LocationFacade.GetLockInfo(dgvList.Id);
+
+            if( lInfo.IsLocked ) //if (LocationFacade.IsLocked(dgvList.Id))    // Check if record is locked
+            {
+                string msg = "Account is currently locked by '" + lInfo.LockBy + "' since '" + lInfo.LockAt + "'";
+                new frmMsg(msg).ShowDialog();
+                return;
+            }
+            LockControls(false);
+            LocationFacade.Lock(dgvList.Id);
+
         }
     }
 }

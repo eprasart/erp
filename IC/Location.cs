@@ -69,9 +69,9 @@ namespace ERP
                 mSave.ChangeAt = ts;
                 Database.Connection.UpdateOnly(mSave, p => new { p.Code, p.Desc1, p.Desc2, p.Address, p.Note, ChangeBy = p.ChangeBy, ChangeAt = p.ChangeAt },
                     p => p.Id == m.Id);
-                //Database.Connection.Delete<Location>(where: "Age = {0}".Params(27));
-            }
-            //System.Windows.Forms.MessageBox.Show(Database.Connection.GetLastSql());
+                // If record is lock then unlock
+                if (IsLocked(m.Id)) ReleaseLock(m.Id);
+            }            
         }
 
         public static Location Select(int Id)
@@ -89,16 +89,27 @@ namespace ERP
             return Database.Connection.Exists<Location>("Id = @Id and Lock_By = @LockBy", new { Id = Id, LockBy = Login.Username });
         }
 
-        public static Lock GetLockInfo(int Id)
+        public static LockInfo GetLockInfo(int Id)
         {
-            var l = new Lock();
-            Database.Connection.select
+            var m = Select(Id);
+            var l = new LockInfo();
+            l.Id = Id;
+            l.LockBy = m.LockBy;
+            l.LockAt = m.LockAt;            
+            return l;
         }
 
-        public static void LockRecord(int Id)
+        public static void Lock(int Id)
         {
             DateTime ts = Database.GetCurrentTimeStamp();
             Database.Connection.UpdateOnly(new Location { LockBy = Login.Username, LockAt = ts }, p => new { p.LockBy, p.LockAt }, p => p.Id == Id);
         }
+
+        public static void ReleaseLock(int Id)
+        {
+            DateTime ts = Database.GetCurrentTimeStamp();
+            Database.Connection.UpdateOnly(new Location { LockBy = null }, p => p.LockBy, p => p.Id == Id);
+        }
+
     }
 }

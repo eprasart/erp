@@ -10,11 +10,23 @@ using System.Windows.Forms;
 
 namespace ERP
 {
-    public partial class Msg : Form
+    public partial class frmMsg : Form
     {
-        public Msg()
+        public frmMsg()
         {
             InitializeComponent();
         }
+
+        public frmMsg(string msg)
+            : this()
+        {
+            txtMsg.Text = msg;
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            DialogResult = System.Windows.Forms.DialogResult.OK;
+        }
+
     }
 }
