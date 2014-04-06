@@ -13,7 +13,7 @@ namespace ERP
         public DateTime? LockAt { get; set; }
         public bool IsLocked
         {
-            get { return LockBy != null; }
+            get { return LockBy != null || LockBy.Length == 0; }
         }
     }
 }
