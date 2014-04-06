@@ -14,7 +14,9 @@ namespace ERP
     public partial class frmLocationList : Form
     {
         private int Id = 0;
+        private int rowIndex = 0;
         private bool bExpand = false;
+
 
         public frmLocationList()
         {
@@ -24,7 +26,7 @@ namespace ERP
         private void RefreshGrid()
         {
             dgvList.DataSource = LocationFacade.Select(txtSearch.Text);
-
+            dgvList.CurrentCell = dgvList[1, rowIndex];
         }
 
         private void LockControls(bool l = true)
@@ -45,6 +47,7 @@ namespace ERP
             btnDelete.Enabled = l;
             splitContainer1.Panel1.Enabled = l;
             btnUnlock.Text = l ? "Un&lock" : "Cance&l";
+            btnUnlock.ToolTipText = btnUnlock.Text + " (Ctrl+C)";
         }
 
         private void frmLocationList_Load(object sender, EventArgs e)
@@ -62,8 +65,7 @@ namespace ERP
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            if (bExpand)
-                picExpand_Click(sender, e);
+            if (bExpand) picExpand_Click(sender, e);
             txtCode.Text = "";
             txtCode.Focus();
             txtDescEN.Text = "";
@@ -72,9 +74,10 @@ namespace ERP
             txtFax.Text = "";
             txtAddress.Text = "";
             txtNote.Text = "";
+            if (dgvList.Id > 0) dgvList.CurrentRow.Selected = false;
             Id = 0;
             LockControls(false);
-            // dgvList.Sort(colDescEN, System.ComponentModel.ListSortDirection.Ascending);
+            rowIndex = dgvList.CurrentRow.Index;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -89,6 +92,7 @@ namespace ERP
             m.Address = txtAddress.Text;
             m.Note = txtNote.Text;
             LocationFacade.Save(m);
+            rowIndex = dgvList.CurrentRow.Index;
             RefreshGrid();
             LockControls();
             Cursor = Cursors.Default;
@@ -153,6 +157,7 @@ namespace ERP
         {
             Id = 0;
             txtCode.Focus();
+            LockControls(false);
         }
 
         private void picExpand_Click(object sender, EventArgs e)
@@ -200,14 +205,16 @@ namespace ERP
             if (btnUnlock.Text == "Cance&l")
             {
                 LockControls(true);
+                dgvList.CurrentCell = dgvList[1, rowIndex];
                 LocationFacade.ReleaseLock(dgvList.Id);
+                //todo: reload orginal data (if dirty)
                 return;
             }
 
             // Unlock
             var lInfo = LocationFacade.GetLockInfo(dgvList.Id);
 
-            if( lInfo.IsLocked ) //if (LocationFacade.IsLocked(dgvList.Id))    // Check if record is locked
+            if (lInfo.IsLocked) //if (LocationFacade.IsLocked(dgvList.Id))    // Check if record is locked
             {
                 string msg = "Account is currently locked by '" + lInfo.LockBy + "' since '" + lInfo.LockAt + "'";
                 new frmMsg(msg).ShowDialog();
@@ -216,6 +223,35 @@ namespace ERP
             LockControls(false);
             LocationFacade.Lock(dgvList.Id);
 
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.Control | Keys.N:
+                    if (btnNew.Enabled) btnNew_Click(null, null);
+                    break;
+                case Keys.Control | Keys.Y:
+                    if (btnCopy.Enabled) btnCopy_Click(null, null);
+                    break;
+                case Keys.Control | Keys.L:
+                    if (btnUnlock.Enabled) btnUnlock_Click(null, null);
+                    break;
+                case Keys.Control | Keys.S:
+                    if (btnSave.Enabled) btnSave_Click(null, null);
+                    break;
+                case Keys.Control | Keys.W:
+                    if (btnSaveNew.Enabled) btnSaveNew_Click(null, null);
+                    break;
+                case Keys.Control | Keys.E:
+                    if (btnActive.Enabled) btnActive_Click(null, null);
+                    break;
+                case Keys.Delete:
+                    if (btnDelete.Enabled) btnDelete_Click(null, null);
+                    break;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }
