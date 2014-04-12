@@ -58,10 +58,12 @@
             // 
             // txtMsg
             // 
-            this.txtMsg.BackColor = System.Drawing.SystemColors.Control;
+            this.txtMsg.BackColor = System.Drawing.SystemColors.Window;
             this.txtMsg.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtMsg.Font = new System.Drawing.Font("Khmer OS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMsg.Location = new System.Drawing.Point(51, 13);
             this.txtMsg.Name = "txtMsg";
+            this.txtMsg.ReadOnly = true;
             this.txtMsg.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
             this.txtMsg.Size = new System.Drawing.Size(399, 65);
             this.txtMsg.TabIndex = 3;
@@ -71,6 +73,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(462, 119);
             this.ControlBox = false;
             this.Controls.Add(this.txtMsg);

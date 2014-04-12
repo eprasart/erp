@@ -39,8 +39,6 @@ namespace ERP
                 .OrderBy(q => q.Code);
             //System.Windows.Forms.MessageBox.Show(e.SelectExpression + "\n" + e.WhereExpression);
             return Database.Connection.Select<Location>(e);
-
-            //);
         }
 
         public static void Save(Location m)

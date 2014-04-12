@@ -17,7 +17,7 @@ namespace ERP
         public string Name_KH { get; set; }
         //[Default(typeof(string), "A")]
         [StringLength(1)]        
-        public String Status { get; set; }  //TODO: try char(1) again        
+        public String Status { get; set; } 
     }
 
     static class VendorFacade
@@ -49,7 +49,6 @@ namespace ERP
         public static void Delete(int Id)
         {
             Database.Connection.UpdateOnly(new Vendor { Status = StatusType.Deleted }, p => p.Status, p => p.Id == Id);
-            //todo: status code in enum
         }
     }
 }

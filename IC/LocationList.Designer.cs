@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLocationList));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle65 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle68 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle66 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle67 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnNew = new System.Windows.Forms.ToolStripButton();
             this.btnCopy = new System.Windows.Forms.ToolStripButton();
@@ -58,6 +58,10 @@
             this.lblRefresh = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
             this.txtSearch = new Kredit.UI.TextBox(this.components);
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.groupLabel2 = new Kredit.UI.GroupLabel();
+            this.groupLabel1 = new Kredit.UI.GroupLabel();
             this.txtNote = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.txtAddress = new System.Windows.Forms.TextBox();
@@ -70,11 +74,8 @@
             this.label13 = new System.Windows.Forms.Label();
             this.txtDescEN = new Kredit.UI.TextBox(this.components);
             this.label11 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.groupLabel1 = new Kredit.UI.GroupLabel();
-            this.groupLabel2 = new Kredit.UI.GroupLabel();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -192,6 +193,8 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.label4);
+            this.splitContainer1.Panel2.Controls.Add(this.label5);
             this.splitContainer1.Panel2.Controls.Add(this.groupLabel2);
             this.splitContainer1.Panel2.Controls.Add(this.groupLabel1);
             this.splitContainer1.Panel2.Controls.Add(this.txtNote);
@@ -205,7 +208,6 @@
             this.splitContainer1.Panel2.Controls.Add(this.label13);
             this.splitContainer1.Panel2.Controls.Add(this.txtDescEN);
             this.splitContainer1.Panel2.Controls.Add(this.label11);
-            this.splitContainer1.Panel2.Controls.Add(this.label4);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Panel2.Controls.Add(this.label1);
             this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(6, 3, 6, 6);
@@ -219,8 +221,8 @@
             this.dgvList.AllowUserToAddRows = false;
             this.dgvList.AllowUserToDeleteRows = false;
             this.dgvList.AllowUserToResizeRows = false;
-            dataGridViewCellStyle65.BackColor = System.Drawing.Color.Honeydew;
-            this.dgvList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle65;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Honeydew;
+            this.dgvList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -237,14 +239,14 @@
             this.Column5,
             this.Column6,
             this.Column7});
-            dataGridViewCellStyle68.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle68.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle68.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle68.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle68.SelectionBackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle68.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle68.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvList.DefaultCellStyle = dataGridViewCellStyle68;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvList.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvList.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.dgvList.Location = new System.Drawing.Point(3, 56);
             this.dgvList.Name = "dgvList";
@@ -254,6 +256,7 @@
             this.dgvList.Size = new System.Drawing.Size(296, 436);
             this.dgvList.TabIndex = 0;
             this.dgvList.SelectionChanged += new System.EventHandler(this.dgvList_SelectionChanged);
+            this.dgvList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvList_KeyDown);
             // 
             // Column1
             // 
@@ -276,8 +279,8 @@
             // 
             this.colDesc1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colDesc1.DataPropertyName = "Desc1";
-            dataGridViewCellStyle66.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.colDesc1.DefaultCellStyle = dataGridViewCellStyle66;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.colDesc1.DefaultCellStyle = dataGridViewCellStyle2;
             this.colDesc1.HeaderText = "Description 1";
             this.colDesc1.Name = "colDesc1";
             this.colDesc1.ReadOnly = true;
@@ -285,8 +288,8 @@
             // Column4
             // 
             this.Column4.DataPropertyName = "Desc2";
-            dataGridViewCellStyle67.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Column4.DefaultCellStyle = dataGridViewCellStyle67;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Column4.DefaultCellStyle = dataGridViewCellStyle3;
             this.Column4.HeaderText = "Description 2";
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
@@ -390,17 +393,61 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(296, 30);
             this.txtSearch.TabIndex = 3;
-            this.txtSearch.TabOnEnter = true;
+            this.txtSearch.TabOnEnter = false;
             this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(49, 30);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 22);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Code";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Tomato;
+            this.label5.Location = new System.Drawing.Point(39, 32);
+            this.label5.Margin = new System.Windows.Forms.Padding(0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(16, 18);
+            this.label5.TabIndex = 37;
+            this.label5.Text = "*";
+            // 
+            // groupLabel2
+            // 
+            this.groupLabel2.Caption = "Contact";
+            this.groupLabel2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupLabel2.Location = new System.Drawing.Point(360, 8);
+            this.groupLabel2.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
+            this.groupLabel2.Name = "groupLabel2";
+            this.groupLabel2.Size = new System.Drawing.Size(260, 16);
+            this.groupLabel2.TabIndex = 8;
+            this.groupLabel2.TabStop = false;
+            // 
+            // groupLabel1
+            // 
+            this.groupLabel1.Caption = "General";
+            this.groupLabel1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupLabel1.Location = new System.Drawing.Point(9, 8);
+            this.groupLabel1.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
+            this.groupLabel1.Name = "groupLabel1";
+            this.groupLabel1.Size = new System.Drawing.Size(281, 16);
+            this.groupLabel1.TabIndex = 8;
+            this.groupLabel1.TabStop = false;
             // 
             // txtNote
             // 
             this.txtNote.ContextMenuStrip = this.contextMenuStrip1;
             this.txtNote.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNote.Location = new System.Drawing.Point(9, 157);
+            this.txtNote.Location = new System.Drawing.Point(16, 157);
             this.txtNote.Multiline = true;
             this.txtNote.Name = "txtNote";
-            this.txtNote.Size = new System.Drawing.Size(602, 64);
+            this.txtNote.Size = new System.Drawing.Size(604, 64);
             this.txtNote.TabIndex = 7;
             // 
             // contextMenuStrip1
@@ -424,7 +471,7 @@
             this.groupLabel3.Location = new System.Drawing.Point(10, 135);
             this.groupLabel3.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
             this.groupLabel3.Name = "groupLabel3";
-            this.groupLabel3.Size = new System.Drawing.Size(601, 16);
+            this.groupLabel3.Size = new System.Drawing.Size(610, 16);
             this.groupLabel3.TabIndex = 4;
             this.groupLabel3.TabStop = false;
             // 
@@ -504,16 +551,6 @@
             this.label11.TabIndex = 0;
             this.label11.Text = "Phone";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(49, 33);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 22);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Code";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -533,28 +570,6 @@
             this.label1.Size = new System.Drawing.Size(72, 22);
             this.label1.TabIndex = 0;
             this.label1.Text = "Description 1";
-            // 
-            // groupLabel1
-            // 
-            this.groupLabel1.Caption = "General";
-            this.groupLabel1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupLabel1.Location = new System.Drawing.Point(9, 8);
-            this.groupLabel1.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
-            this.groupLabel1.Name = "groupLabel1";
-            this.groupLabel1.Size = new System.Drawing.Size(281, 16);
-            this.groupLabel1.TabIndex = 8;
-            this.groupLabel1.TabStop = false;
-            // 
-            // groupLabel2
-            // 
-            this.groupLabel2.Caption = "Contact";
-            this.groupLabel2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupLabel2.Location = new System.Drawing.Point(360, 8);
-            this.groupLabel2.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
-            this.groupLabel2.Name = "groupLabel2";
-            this.groupLabel2.Size = new System.Drawing.Size(260, 16);
-            this.groupLabel2.TabIndex = 8;
-            this.groupLabel2.TabStop = false;
             // 
             // frmLocationList
             // 
@@ -628,7 +643,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private Kredit.UI.GroupLabel groupLabel2;
-        private Kredit.UI.GroupLabel groupLabel1;        
+        private Kredit.UI.GroupLabel groupLabel1;
+        private System.Windows.Forms.Label label5;        
     }
 }
 

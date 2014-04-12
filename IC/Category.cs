@@ -20,7 +20,7 @@ namespace ERP
         [StringLength(4000)]
         public string Note { get; set; }
         [StringLength(1)]
-        public String Status { get; set; }  //TODO: try char(1) again
+        public String Status { get; set; } 
         public string Insert_By { get; set; }
         public DateTime Insert_At { get; set; }
         public string Lock_By { get; set; }
@@ -59,8 +59,7 @@ namespace ERP
 
         public static void Delete(int Id)
         {
-            Database.Connection.UpdateOnly(new Location { Status = StatusType.Deleted }, p => p.Status, p => p.Id == Id);
-            //todo: status code in enum
+            Database.Connection.UpdateOnly(new Location { Status = StatusType.Deleted }, p => p.Status, p => p.Id == Id);            
         }
     }
 }

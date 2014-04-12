@@ -16,6 +16,13 @@ namespace ERP
             else
                 return s;
         }
+
+        public static void ShowMsg(string msg, string title)
+        {
+            var fMsg = new frmMsg(msg);
+            fMsg.Title = title;
+            fMsg.ShowDialog();
+        }
     }
 
 

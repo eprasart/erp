@@ -1,10 +1,8 @@
 ﻿/*TODO: 
- * Prompt deletion => khmer msg
- * Edit cancel confirmation
- * Shortcut key
- * datagridview: remember row index after refresh
- * spliterDistance: save in table by user
+ * msg => English and/or Khmer (use both font in rtf to make it render nice)
+  * spliterDistance: save in table by user
  * datagridview sort by column header
+ * show/search inactive
  */
 using System;
 using System.Windows.Forms;
@@ -15,8 +13,8 @@ namespace ERP
     {
         private int Id = 0;
         private int rowIndex = 0;
-        private bool bExpand = false;
-
+        private bool isExpand = false;
+        private bool isDirty = false;
 
         public frmLocationList()
         {
@@ -26,7 +24,7 @@ namespace ERP
         private void RefreshGrid()
         {
             dgvList.DataSource = LocationFacade.Select(txtSearch.Text);
-            dgvList.CurrentCell = dgvList[1, rowIndex];
+            if (dgvList.RowCount > 0) dgvList.CurrentCell = dgvList[1, rowIndex];
         }
 
         private void LockControls(bool l = true)
@@ -50,6 +48,17 @@ namespace ERP
             btnUnlock.ToolTipText = btnUnlock.Text + " (Ctrl+C)";
         }
 
+        private bool  isValidated()
+        {
+            if (txtCode.Text.Trim().Length==0)
+            {
+                Common.ShowMsg("Code cannot be empty.", "Save");
+                txtCode.Focus();
+                return false;
+            }
+            return true;
+        }
+
         private void frmLocationList_Load(object sender, EventArgs e)
         {
             App.InitApp();
@@ -65,7 +74,7 @@ namespace ERP
 
         private void btnNew_Click(object sender, EventArgs e)
         {
-            if (bExpand) picExpand_Click(sender, e);
+            if (isExpand) picExpand_Click(sender, e);
             txtCode.Text = "";
             txtCode.Focus();
             txtDescEN.Text = "";
@@ -82,7 +91,7 @@ namespace ERP
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            // TODO: Validation
+            if (!isValidated()) return;
             Cursor = Cursors.WaitCursor;
             var m = new Location();
             m.Id = Id;
@@ -162,8 +171,8 @@ namespace ERP
 
         private void picExpand_Click(object sender, EventArgs e)
         {
-            splitContainer1.IsSplitterFixed = !bExpand;
-            if (!bExpand)
+            splitContainer1.IsSplitterFixed = !isExpand;
+            if (!isExpand)
             {
                 splitContainer1.SplitterDistance = splitContainer1.Size.Width;
                 splitContainer1.FixedPanel = FixedPanel.Panel2;
@@ -175,19 +184,21 @@ namespace ERP
                 splitContainer1.FixedPanel = FixedPanel.Panel1;
                 imgExpand.Image = Properties.Resources.Next;
             }
-            dgvList.ShowLessColumns(bExpand);
-            bExpand = !bExpand;
+            dgvList.ShowLessColumns(isExpand);
+            isExpand = !isExpand;
         }
 
         private void dgvList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (bExpand) picExpand_Click(sender, e);
+            if (isExpand) picExpand_Click(sender, e);
             dgvList_SelectionChanged(sender, e);    // reload data since SelectionChanged will not occured on current row
         }
 
         private void frmLocationList_FormClosed(object sender, FormClosedEventArgs e)
         {
-            App.SaveSettings();
+            if (btnUnlock.Text == "Cance&l")
+                btnUnlock_Click(null, null);
+            App.SaveSettings(); // Move to main form instead
         }
 
         private void btnActive_Click(object sender, EventArgs e)
@@ -204,10 +215,14 @@ namespace ERP
             // Cancel
             if (btnUnlock.Text == "Cance&l")
             {
+                if (isDirty)
+                {
+                    //todo: reload orginal data (if dirty)
+                    
+                }
                 LockControls(true);
-                dgvList.CurrentCell = dgvList[1, rowIndex];
-                LocationFacade.ReleaseLock(dgvList.Id);
-                //todo: reload orginal data (if dirty)
+                //dgvList.CurrentCell = dgvList[1, rowIndex];
+                LocationFacade.ReleaseLock(dgvList.Id);                
                 return;
             }
 
@@ -222,7 +237,6 @@ namespace ERP
             }
             LockControls(false);
             LocationFacade.Lock(dgvList.Id);
-
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -247,11 +261,17 @@ namespace ERP
                 case Keys.Control | Keys.E:
                     if (btnActive.Enabled) btnActive_Click(null, null);
                     break;
-                case Keys.Delete:
-                    if (btnDelete.Enabled) btnDelete_Click(null, null);
-                    break;
             }
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void dgvList_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                e.SuppressKeyPress = true;
+                if (btnDelete.Enabled) btnDelete_Click(null, null);
+            }
         }
     }
 }

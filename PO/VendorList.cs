@@ -1,11 +1,4 @@
-﻿/*TODO: 
- * Prompt deletion => khmer msg
- * Edit cancel confirmation
- * Shortcut key
- * datagridview: remember row index after refresh
- * spliterDistance: save in table by user
- */
-using System;
+﻿using System;
 using System.Windows.Forms;
 
 namespace ERP
@@ -40,8 +33,7 @@ namespace ERP
         }
 
         private void btnSave_Click(object sender, EventArgs e)
-        {
-            // TODO: Validation
+        {            
             var v = new Vendor();
             v.Id = Id;
             v.Name_EN = txtNameEN.Text;

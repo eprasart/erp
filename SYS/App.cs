@@ -13,8 +13,6 @@ namespace ERP
 {
     public static class App
     {
-
-
         public static Setting setting = new Setting();
         public static String version;
 
