@@ -12,7 +12,7 @@ namespace ERP
     class Location
     {
         [AutoIncrement]
-        public int Id { get; set; }
+        public long Id { get; set; }
         public int CompanyId { get; set; }
         [Required]
         public string Code { get; set; }
@@ -41,9 +41,10 @@ namespace ERP
             return Database.Connection.Select<Location>(e);
         }
 
-        public static void Save(Location m)
+        public static long Save(Location m)
         {
             DateTime? ts = Database.GetCurrentTimeStamp();
+            long seq = 0;
             var mSave = new Location
             {
                 Code = m.Code,
@@ -57,7 +58,8 @@ namespace ERP
                 mSave.Status = StatusType.Active;
                 mSave.InsertBy = Login.Username;
                 mSave.InsertAt = ts;
-                Database.Connection.Insert(mSave);
+                seq = Database.Connection.Insert(mSave, true);
+                
                 //Database.Connection.Update<Location>( set: "Insert_At = {0}".Params("CURRENT_TIMESTAMP"), where: "Id = {0}".Params(Id));                
                 //Database.Connection.InsertOnly(new Location { Code = mSave.Code, Desc1 = mSave.Desc1, ChangeAt = ts }, ev => ev.Insert(p => new { p.Code, p.Desc1 }));
             }
@@ -69,42 +71,45 @@ namespace ERP
                     p => p.Id == m.Id);
                 // If record is lock then unlock
                 if (IsLocked(m.Id)) ReleaseLock(m.Id);
-            }            
+            }
+            return seq;
         }
 
-        public static Location Select(int Id)
+        public static Location Select(long Id)
         {
             return Database.Connection.SingleById<Location>(Id);
         }
 
-        public static void SetStatus(int Id, string s)
+        public static void SetStatus(long Id, string s)
         {
+            //todo: also set update_by and time
             Database.Connection.UpdateOnly(new Location { Status = s }, p => p.Status, p => p.Id == Id);
         }
 
-        public static bool IsLocked(int Id)
+        public static bool IsLocked(long Id)
         {
             return Database.Connection.Exists<Location>("Id = @Id and Lock_By = @LockBy", new { Id = Id, LockBy = Login.Username });
         }
 
-        public static LockInfo GetLockInfo(int Id)
-        {
+        public static LockInfo GetLockInfo(long Id)
+        {            
             var m = Select(Id);
             var l = new LockInfo();
             l.Id = Id;
             l.LockBy = m.LockBy;
-            l.LockAt = m.LockAt;            
+            l.LockAt = m.LockAt;
             return l;
         }
 
-        public static void Lock(int Id)
+        public static void Lock(long Id)
         {
             DateTime ts = Database.GetCurrentTimeStamp();
             Database.Connection.UpdateOnly(new Location { LockBy = Login.Username, LockAt = ts }, p => new { p.LockBy, p.LockAt }, p => p.Id == Id);
         }
 
-        public static void ReleaseLock(int Id)
+        public static void ReleaseLock(long Id)
         {
+            if (Id == 0) return;
             DateTime ts = Database.GetCurrentTimeStamp();
             Database.Connection.UpdateOnly(new Location { LockBy = null }, p => p.LockBy, p => p.Id == Id);
         }

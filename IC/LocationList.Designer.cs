@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLocationList));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnNew = new System.Windows.Forms.ToolStripButton();
             this.btnCopy = new System.Windows.Forms.ToolStripButton();
@@ -221,8 +221,8 @@
             this.dgvList.AllowUserToAddRows = false;
             this.dgvList.AllowUserToDeleteRows = false;
             this.dgvList.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Honeydew;
-            this.dgvList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.Honeydew;
+            this.dgvList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -239,14 +239,14 @@
             this.Column5,
             this.Column6,
             this.Column7});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvList.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvList.DefaultCellStyle = dataGridViewCellStyle12;
             this.dgvList.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.dgvList.Location = new System.Drawing.Point(3, 56);
             this.dgvList.Name = "dgvList";
@@ -255,6 +255,7 @@
             this.dgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvList.Size = new System.Drawing.Size(296, 436);
             this.dgvList.TabIndex = 0;
+            this.dgvList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellDoubleClick);
             this.dgvList.SelectionChanged += new System.EventHandler(this.dgvList_SelectionChanged);
             this.dgvList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvList_KeyDown);
             // 
@@ -279,8 +280,8 @@
             // 
             this.colDesc1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colDesc1.DataPropertyName = "Desc1";
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.colDesc1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.colDesc1.DefaultCellStyle = dataGridViewCellStyle10;
             this.colDesc1.HeaderText = "Description 1";
             this.colDesc1.Name = "colDesc1";
             this.colDesc1.ReadOnly = true;
@@ -288,8 +289,8 @@
             // Column4
             // 
             this.Column4.DataPropertyName = "Desc2";
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Column4.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Column4.DefaultCellStyle = dataGridViewCellStyle11;
             this.Column4.HeaderText = "Description 2";
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
@@ -348,6 +349,7 @@
             this.lblClear.ActiveLinkColor = System.Drawing.Color.Navy;
             this.lblClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblClear.AutoSize = true;
+            this.lblClear.Enabled = false;
             this.lblClear.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblClear.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
             this.lblClear.LinkColor = System.Drawing.Color.Navy;
@@ -394,6 +396,7 @@
             this.txtSearch.Size = new System.Drawing.Size(296, 30);
             this.txtSearch.TabIndex = 3;
             this.txtSearch.TabOnEnter = false;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
             // 
             // label4
@@ -444,10 +447,10 @@
             // 
             this.txtNote.ContextMenuStrip = this.contextMenuStrip1;
             this.txtNote.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNote.Location = new System.Drawing.Point(16, 157);
+            this.txtNote.Location = new System.Drawing.Point(15, 168);
             this.txtNote.Multiline = true;
             this.txtNote.Name = "txtNote";
-            this.txtNote.Size = new System.Drawing.Size(604, 64);
+            this.txtNote.Size = new System.Drawing.Size(605, 64);
             this.txtNote.TabIndex = 7;
             // 
             // contextMenuStrip1
@@ -461,14 +464,14 @@
             this.txtAddress.Location = new System.Drawing.Point(420, 84);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(200, 34);
+            this.txtAddress.Size = new System.Drawing.Size(200, 50);
             this.txtAddress.TabIndex = 6;
             // 
             // groupLabel3
             // 
             this.groupLabel3.Caption = "Note";
             this.groupLabel3.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupLabel3.Location = new System.Drawing.Point(10, 135);
+            this.groupLabel3.Location = new System.Drawing.Point(10, 146);
             this.groupLabel3.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
             this.groupLabel3.Name = "groupLabel3";
             this.groupLabel3.Size = new System.Drawing.Size(610, 16);
@@ -526,7 +529,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(365, 93);
+            this.label13.Location = new System.Drawing.Point(365, 87);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(49, 22);
             this.label13.TabIndex = 0;
@@ -635,16 +638,16 @@
         private System.Windows.Forms.Label label14;
         private Kredit.UI.TextBox txtPhone;
         private System.Windows.Forms.Label label11;
+        private Kredit.UI.GroupLabel groupLabel2;
+        private Kredit.UI.GroupLabel groupLabel1;
+        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDesc1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private Kredit.UI.GroupLabel groupLabel2;
-        private Kredit.UI.GroupLabel groupLabel1;
-        private System.Windows.Forms.Label label5;        
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;        
     }
 }
 

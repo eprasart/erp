@@ -1,9 +1,9 @@
 ﻿/*TODO: 
  * msg => English and/or Khmer (use both font in rtf to make it render nice)
-  * spliterDistance: save in table by user
+ * spliterDistance: save in table by user
  * datagridview sort by column header
  * show/search inactive
- */
+*/
 using System;
 using System.Windows.Forms;
 
@@ -11,7 +11,7 @@ namespace ERP
 {
     public partial class frmLocationList : Form
     {
-        private int Id = 0;
+        private long Id = 0;
         private int rowIndex = 0;
         private bool isExpand = false;
         private bool isDirty = false;
@@ -21,10 +21,25 @@ namespace ERP
             InitializeComponent();
         }
 
-        private void RefreshGrid()
+        private void RefreshGrid(long seq = 0)
         {
+            if (dgvList.RowCount > 0) rowIndex = dgvList.CurrentRow.Index;
             dgvList.DataSource = LocationFacade.Select(txtSearch.Text);
-            if (dgvList.RowCount > 0) dgvList.CurrentCell = dgvList[1, rowIndex];
+            if (dgvList.RowCount > 0)
+                if (seq == 0)
+                {
+                    if (rowIndex >= dgvList.RowCount) rowIndex = dgvList.RowCount - 1;
+                    dgvList.CurrentCell = dgvList[1, rowIndex];
+                }
+                else
+                    foreach (DataGridViewRow row in dgvList.Rows)
+                        if ((long)row.Cells[0].Value == seq)
+                        {
+                            Id = (int)seq;
+                            dgvList.CurrentCell = dgvList[1, row.Index];
+                            break;
+                        }
+            LoadData();
         }
 
         private void LockControls(bool l = true)
@@ -48,15 +63,29 @@ namespace ERP
             btnUnlock.ToolTipText = btnUnlock.Text + " (Ctrl+C)";
         }
 
-        private bool  isValidated()
+        private bool IsValidated()
         {
-            if (txtCode.Text.Trim().Length==0)
+            if (txtCode.Text.Trim().Length == 0)
             {
                 Common.ShowMsg("Code cannot be empty.", "Save");
                 txtCode.Focus();
                 return false;
             }
             return true;
+        }
+
+        private void LoadData()
+        {
+            var Id = dgvList.Id;
+            if (Id == 0) return;
+            var m = LocationFacade.Select(Id);
+            txtCode.Text = m.Code;
+            txtDescEN.Text = m.Desc1;
+            txtDescKH.Text = m.Desc2;
+            txtAddress.Text = m.Address;
+            txtNote.Text = m.Note;
+
+            LockControls();
         }
 
         private void frmLocationList_Load(object sender, EventArgs e)
@@ -83,15 +112,16 @@ namespace ERP
             txtFax.Text = "";
             txtAddress.Text = "";
             txtNote.Text = "";
-            if (dgvList.Id > 0) dgvList.CurrentRow.Selected = false;
+            if (dgvList.RowCount > 0)
+                dgvList.CurrentRow.Selected = false;
             Id = 0;
             LockControls(false);
-            rowIndex = dgvList.CurrentRow.Index;
+            if (dgvList.RowCount > 0) rowIndex = dgvList.CurrentRow.Index;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (!isValidated()) return;
+            if (!IsValidated()) return;
             Cursor = Cursors.WaitCursor;
             var m = new Location();
             m.Id = Id;
@@ -100,9 +130,9 @@ namespace ERP
             m.Desc2 = txtDescKH.Text;
             m.Address = txtAddress.Text;
             m.Note = txtNote.Text;
-            LocationFacade.Save(m);
-            rowIndex = dgvList.CurrentRow.Index;
-            RefreshGrid();
+            long seq = LocationFacade.Save(m);
+            if (dgvList.RowCount > 0) rowIndex = dgvList.CurrentRow.Index;
+            RefreshGrid(seq);
             LockControls();
             Cursor = Cursors.Default;
         }
@@ -131,31 +161,21 @@ namespace ERP
 
         private void dgvList_SelectionChanged(object sender, EventArgs e)
         {
-            if (Id == dgvList.Id)
-                return;
-            else
-                Id = dgvList.Id;
-            if (Id == 0) return;
-            var m = LocationFacade.Select(Id);
-            txtCode.Text = m.Code;
-            txtDescEN.Text = m.Desc1;
-            txtDescKH.Text = m.Desc2;
-            txtAddress.Text = m.Address;
-            txtNote.Text = m.Note;
-
-            LockControls();
+            LoadData();
         }
 
         private void btnSaveNew_Click(object sender, EventArgs e)
         {
             btnSave_Click(sender, e);
             btnNew_Click(sender, e);
+            //todo: code not clear
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
             var Id = dgvList.Id;
             if (Id == 0) return;
+            //todo: check if locked
             if (MessageBox.Show("Are you sure you want to delete?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.No) return;
             LocationFacade.SetStatus(Id, StatusType.Deleted);
             RefreshGrid();
@@ -205,6 +225,14 @@ namespace ERP
         {
             var Id = dgvList.Id;
             if (Id == 0) return;
+            var lInfo = LocationFacade.GetLockInfo(Id);
+            if (lInfo.IsLocked)
+            {
+                string msg = "Account is currently locked by '" + lInfo.LockBy + "' since '" + lInfo.LockAt + "'";
+                new frmMsg(msg).ShowDialog();
+                return;
+            }
+            //todo: check if locked
             //todo: if A else I
             LocationFacade.SetStatus(Id, StatusType.InActive);
             RefreshGrid();
@@ -212,22 +240,26 @@ namespace ERP
 
         private void btnUnlock_Click(object sender, EventArgs e)
         {
+            Id = dgvList.Id;
             // Cancel
             if (btnUnlock.Text == "Cance&l")
             {
                 if (isDirty)
                 {
                     //todo: reload orginal data (if dirty)
-                    
+
                 }
                 LockControls(true);
                 //dgvList.CurrentCell = dgvList[1, rowIndex];
-                LocationFacade.ReleaseLock(dgvList.Id);                
+                LocationFacade.ReleaseLock(dgvList.Id);
+                if (dgvList.RowCount>0 && !dgvList.CurrentRow.Selected) 
+                    dgvList.CurrentRow.Selected = true;
                 return;
             }
 
             // Unlock
-            var lInfo = LocationFacade.GetLockInfo(dgvList.Id);
+            if (Id == 0) return;
+            var lInfo = LocationFacade.GetLockInfo(Id);
 
             if (lInfo.IsLocked) //if (LocationFacade.IsLocked(dgvList.Id))    // Check if record is locked
             {
@@ -272,6 +304,11 @@ namespace ERP
                 e.SuppressKeyPress = true;
                 if (btnDelete.Enabled) btnDelete_Click(null, null);
             }
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            lblClear.Enabled = (txtSearch.Text.Length > 0);
         }
     }
 }

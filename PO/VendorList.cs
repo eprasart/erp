@@ -5,7 +5,7 @@ namespace ERP
 {
     public partial class frmVendorList : Form
     {
-        private int Id = 0;
+        private long Id = 0;
         private bool bExpand = false;
 
         public frmVendorList()

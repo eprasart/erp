@@ -8,7 +8,7 @@ namespace ERP
 {
     class LockInfo
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string LockBy { get; set; }
         public DateTime? LockAt { get; set; }
         public bool IsLocked

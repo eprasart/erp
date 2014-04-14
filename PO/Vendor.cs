@@ -12,7 +12,7 @@ namespace ERP
     {
         [PrimaryKey]
         [AutoIncrement]
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Name_EN { get; set; }
         public string Name_KH { get; set; }
         //[Default(typeof(string), "A")]
@@ -41,12 +41,12 @@ namespace ERP
             }
         }
 
-        public static Vendor Select(int Id)
+        public static Vendor Select(long Id)
         {
             return Database.Connection.SingleById<Vendor>(Id);
         }
 
-        public static void Delete(int Id)
+        public static void Delete(long Id)
         {
             Database.Connection.UpdateOnly(new Vendor { Status = StatusType.Deleted }, p => p.Status, p => p.Id == Id);
         }
