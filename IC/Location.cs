@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using ServiceStack.OrmLite;
 using ServiceStack.DataAnnotations;
 using System.Linq;
-
+using System.Data;
+using Npgsql;
 
 namespace ERP
 {
@@ -37,14 +38,31 @@ namespace ERP
             SqlExpression<Location> e = OrmLiteConfig.DialectProvider.SqlExpression<Location>();
             e.Where(q => q.Status == StatusType.Active && (q.Code.Contains(filter) || q.Desc1.Contains(filter) || q.Desc2.Contains(filter)))
                 .OrderBy(q => q.Code);
-            //System.Windows.Forms.MessageBox.Show(e.SelectExpression + "\n" + e.WhereExpression);
+            //System.Windows.Forms.MessageBox.Show(e.SelectExpression + "\n" + e.WhereExpression);           
             return Database.Connection.Select<Location>(e);
+        }
+
+        public static DataTable GetDataTable(string filter = "", string status = "")
+        {
+            var sql = "select id, code, desc1, desc2, address from ic_location where 1 = 1";
+            if (status.Length > 0) 
+                sql += " and status = '" + status + "'";
+            if (filter.Length > 0)
+                sql += " and (code ~* :filter or desc1 ~* :filter or desc2 ~* :filter or address ~* :filter or note ~* :filter)";
+            sql += "\norder by code";
+            var cmd = new NpgsqlCommand(sql, new NpgsqlConnection(Database.ConnectionString));
+            if (filter.Length > 0)
+                cmd.Parameters.AddWithValue(":filter", filter);
+            var da = new NpgsqlDataAdapter(cmd);
+            var dt = new DataTable();
+            da.Fill(dt);
+            return dt;
         }
 
         public static long Save(Location m)
         {
             DateTime? ts = Database.GetCurrentTimeStamp();
-            long seq = 0;
+            long seq = 0;   // New inserted sequence
             var mSave = new Location
             {
                 Code = m.Code,
@@ -59,9 +77,6 @@ namespace ERP
                 mSave.InsertBy = Login.Username;
                 mSave.InsertAt = ts;
                 seq = Database.Connection.Insert(mSave, true);
-                
-                //Database.Connection.Update<Location>( set: "Insert_At = {0}".Params("CURRENT_TIMESTAMP"), where: "Id = {0}".Params(Id));                
-                //Database.Connection.InsertOnly(new Location { Code = mSave.Code, Desc1 = mSave.Desc1, ChangeAt = ts }, ev => ev.Insert(p => new { p.Code, p.Desc1 }));
             }
             else
             {
@@ -76,14 +91,14 @@ namespace ERP
         }
 
         public static Location Select(long Id)
-        {
+        {            
             return Database.Connection.SingleById<Location>(Id);
         }
 
         public static void SetStatus(long Id, string s)
         {
-            //todo: also set update_by and time
-            Database.Connection.UpdateOnly(new Location { Status = s }, p => p.Status, p => p.Id == Id);
+            DateTime? ts = Database.GetCurrentTimeStamp();
+            Database.Connection.UpdateOnly(new Location { Status = s, ChangeBy = Login.Username, ChangeAt = ts }, p => new { p.Status, p.ChangeBy, p.ChangeAt }, p => p.Id == Id);
         }
 
         public static bool IsLocked(long Id)
@@ -92,7 +107,7 @@ namespace ERP
         }
 
         public static LockInfo GetLockInfo(long Id)
-        {            
+        {
             var m = Select(Id);
             var l = new LockInfo();
             l.Id = Id;
@@ -113,6 +128,5 @@ namespace ERP
             DateTime ts = Database.GetCurrentTimeStamp();
             Database.Connection.UpdateOnly(new Location { LockBy = null }, p => p.LockBy, p => p.Id == Id);
         }
-
     }
 }

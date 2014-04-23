@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ERP
 {
@@ -17,7 +18,7 @@ namespace ERP
                 return s;
         }
 
-        public static void ShowMsg(string msg, string title)
+        public static void ShowMsg(string msg, string title, MessageBoxButtons buttons = MessageBoxButtons.OK, MessageBoxIcon icon = MessageBoxIcon.Information)
         {
             var fMsg = new frmMsg(msg);
             fMsg.Title = title;

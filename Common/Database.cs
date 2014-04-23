@@ -16,7 +16,7 @@ namespace ERP
 
         public static void PrepareDatabase()
         {
-            Connection.CreateTableIfNotExists(typeof(Category), typeof(Vendor), typeof(Location));
+            Connection.CreateTableIfNotExists(typeof(Location));
             //db.CreateTableIfNotExists<Vendor>();
             //db.CreateTableIfNotExists<Location>();
         }

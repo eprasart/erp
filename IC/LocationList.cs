@@ -21,10 +21,21 @@ namespace ERP
             InitializeComponent();
         }
 
+        private string GetStatus()
+        {
+            var status = "";
+            if (mnuShowA.Checked && !mnuShowI.Checked)
+                status = "A";
+            else if (mnuShowI.Checked && !mnuShowA.Checked)
+                status = "I";
+            return status;
+        }
+
         private void RefreshGrid(long seq = 0)
         {
             if (dgvList.RowCount > 0) rowIndex = dgvList.CurrentRow.Index;
-            dgvList.DataSource = LocationFacade.Select(txtSearch.Text);
+
+            dgvList.DataSource = LocationFacade.GetDataTable(txtSearch.Text, GetStatus());
             if (dgvList.RowCount > 0)
                 if (seq == 0)
                 {
@@ -63,6 +74,22 @@ namespace ERP
             btnUnlock.ToolTipText = btnUnlock.Text + " (Ctrl+C)";
         }
 
+        private void SetStatus(string stat)
+        {
+            if (stat == "A")
+            {
+                btnActive.Text = "Inactiv&e";
+                if (btnActive.Image != Properties.Resources.Inactive)
+                    btnActive.Image = Properties.Resources.Inactive;
+            }
+            else
+            {
+                btnActive.Text = "Activ&e";
+                if (btnActive.Image != Properties.Resources.Active)
+                    btnActive.Image = Properties.Resources.Active;
+            }
+        }
+
         private bool IsValidated()
         {
             if (txtCode.Text.Trim().Length == 0)
@@ -71,6 +98,7 @@ namespace ERP
                 txtCode.Focus();
                 return false;
             }
+            //todo: prevent duplicate
             return true;
         }
 
@@ -85,12 +113,14 @@ namespace ERP
             txtAddress.Text = m.Address;
             txtNote.Text = m.Note;
 
+            SetStatus(m.Status);
+
             LockControls();
         }
 
         private void frmLocationList_Load(object sender, EventArgs e)
         {
-            App.InitApp();
+            App.Init();
 
             Icon = Properties.Resources.Icon;
             dgvList.ShowLessColumns(true);
@@ -107,9 +137,7 @@ namespace ERP
             txtCode.Text = "";
             txtCode.Focus();
             txtDescEN.Text = "";
-            txtDescKH.Text = "";
-            txtPhone.Text = "";
-            txtFax.Text = "";
+            txtDescKH.Text = "";            
             txtAddress.Text = "";
             txtNote.Text = "";
             if (dgvList.RowCount > 0)
@@ -168,15 +196,26 @@ namespace ERP
         {
             btnSave_Click(sender, e);
             btnNew_Click(sender, e);
-            //todo: code not clear
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
             var Id = dgvList.Id;
             if (Id == 0) return;
-            //todo: check if locked
-            if (MessageBox.Show("Are you sure you want to delete?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.No) return;
+
+            // If locked
+            var lInfo = LocationFacade.GetLockInfo(Id);
+            string msg = "";
+            if (lInfo.IsLocked)
+            {
+                msg = "Record cannot be deleted because it is currently locked by '" + lInfo.LockBy + "' since '" + lInfo.LockAt + "'";
+                new frmMsg(msg).ShowDialog();
+                return;
+            }
+            // Delete
+            msg = "Are you sure you want to delete?";
+            if (MessageBox.Show(msg, "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.No)
+                return;
             LocationFacade.SetStatus(Id, StatusType.Deleted);
             RefreshGrid();
             if (dgvList.RowCount == 0) btnNew_Click(sender, e);
@@ -228,13 +267,12 @@ namespace ERP
             var lInfo = LocationFacade.GetLockInfo(Id);
             if (lInfo.IsLocked)
             {
-                string msg = "Account is currently locked by '" + lInfo.LockBy + "' since '" + lInfo.LockAt + "'";
+                string msg = "Account is currently locked by '" + lInfo.LockBy + "' since '" + lInfo.LockAt + "'" +
+                    "\nទិន្នន័យ​នេះ​កំពុង​ប្រើ​ប្រាស់​ដោយ '" + lInfo.LockBy + "' តាំងពី '" + lInfo.LockAt + "'";
                 new frmMsg(msg).ShowDialog();
                 return;
             }
-            //todo: check if locked
-            //todo: if A else I
-            LocationFacade.SetStatus(Id, StatusType.InActive);
+            LocationFacade.SetStatus(Id, btnActive.Text.StartsWith("I") ? StatusType.InActive : StatusType.Active);
             RefreshGrid();
         }
 
@@ -252,7 +290,7 @@ namespace ERP
                 LockControls(true);
                 //dgvList.CurrentCell = dgvList[1, rowIndex];
                 LocationFacade.ReleaseLock(dgvList.Id);
-                if (dgvList.RowCount>0 && !dgvList.CurrentRow.Selected) 
+                if (dgvList.RowCount > 0 && !dgvList.CurrentRow.Selected)
                     dgvList.CurrentRow.Selected = true;
                 return;
             }
@@ -261,7 +299,7 @@ namespace ERP
             if (Id == 0) return;
             var lInfo = LocationFacade.GetLockInfo(Id);
 
-            if (lInfo.IsLocked) //if (LocationFacade.IsLocked(dgvList.Id))    // Check if record is locked
+            if (lInfo.IsLocked) // Check if record is locked
             {
                 string msg = "Account is currently locked by '" + lInfo.LockBy + "' since '" + lInfo.LockAt + "'";
                 new frmMsg(msg).ShowDialog();
@@ -309,6 +347,28 @@ namespace ERP
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             lblClear.Enabled = (txtSearch.Text.Length > 0);
+        }
+
+        private void mnuShow_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!mnuShowA.Checked && !mnuShowI.Checked)
+                mnuShowA.Checked = true;
+            RefreshGrid();
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            mnuShow.Show(lblFilter, 0, 15);
+        }
+
+        private void mnuShow_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
+
+        private void mnuShowA_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

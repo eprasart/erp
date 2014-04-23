@@ -37,8 +37,9 @@
             // 
             // btnOK
             // 
+            this.btnOK.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnOK.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOK.Location = new System.Drawing.Point(201, 83);
+            this.btnOK.Location = new System.Drawing.Point(220, 114);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 0;
@@ -58,6 +59,9 @@
             // 
             // txtMsg
             // 
+            this.txtMsg.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMsg.BackColor = System.Drawing.SystemColors.Window;
             this.txtMsg.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtMsg.Font = new System.Drawing.Font("Khmer OS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -65,7 +69,7 @@
             this.txtMsg.Name = "txtMsg";
             this.txtMsg.ReadOnly = true;
             this.txtMsg.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.txtMsg.Size = new System.Drawing.Size(399, 65);
+            this.txtMsg.Size = new System.Drawing.Size(437, 96);
             this.txtMsg.TabIndex = 3;
             this.txtMsg.Text = "";
             // 
@@ -74,13 +78,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(462, 119);
+            this.ClientSize = new System.Drawing.Size(500, 150);
             this.ControlBox = false;
             this.Controls.Add(this.txtMsg);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnOK);
             this.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "frmMsg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLocationList));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnNew = new System.Windows.Forms.ToolStripButton();
             this.btnCopy = new System.Windows.Forms.ToolStripButton();
@@ -45,37 +45,34 @@
             this.btnDelete = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgvList = new Kredit.UI.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDesc1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.imgExpand = new System.Windows.Forms.PictureBox();
             this.lblClear = new System.Windows.Forms.LinkLabel();
+            this.lblFilter = new System.Windows.Forms.LinkLabel();
             this.lblRefresh = new System.Windows.Forms.LinkLabel();
+            this.mnuShow = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuShowA = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuShowI = new System.Windows.Forms.ToolStripMenuItem();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtSearch = new Kredit.UI.TextBox(this.components);
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.groupLabel2 = new Kredit.UI.GroupLabel();
             this.groupLabel1 = new Kredit.UI.GroupLabel();
             this.txtNote = new System.Windows.Forms.TextBox();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.groupLabel3 = new Kredit.UI.GroupLabel();
             this.txtDescKH = new Kredit.UI.TextBox(this.components);
-            this.txtFax = new Kredit.UI.TextBox(this.components);
-            this.label14 = new System.Windows.Forms.Label();
             this.txtCode = new Kredit.UI.TextBox(this.components);
-            this.txtPhone = new Kredit.UI.TextBox(this.components);
             this.label13 = new System.Windows.Forms.Label();
             this.txtDescEN = new Kredit.UI.TextBox(this.components);
-            this.label11 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtSearch = new Kredit.UI.TextBox(this.components);
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDesc1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -84,6 +81,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgExpand)).BeginInit();
+            this.mnuShow.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -164,7 +162,7 @@
             this.btnActive.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnActive.Name = "btnActive";
             this.btnActive.Size = new System.Drawing.Size(68, 22);
-            this.btnActive.Text = "Inactive";
+            this.btnActive.Text = "Inactiv&e";
             this.btnActive.ToolTipText = "Inactive (Ctrl+E)";
             this.btnActive.Click += new System.EventHandler(this.btnActive_Click);
             // 
@@ -201,13 +199,9 @@
             this.splitContainer1.Panel2.Controls.Add(this.txtAddress);
             this.splitContainer1.Panel2.Controls.Add(this.groupLabel3);
             this.splitContainer1.Panel2.Controls.Add(this.txtDescKH);
-            this.splitContainer1.Panel2.Controls.Add(this.txtFax);
-            this.splitContainer1.Panel2.Controls.Add(this.label14);
             this.splitContainer1.Panel2.Controls.Add(this.txtCode);
-            this.splitContainer1.Panel2.Controls.Add(this.txtPhone);
             this.splitContainer1.Panel2.Controls.Add(this.label13);
             this.splitContainer1.Panel2.Controls.Add(this.txtDescEN);
-            this.splitContainer1.Panel2.Controls.Add(this.label11);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Panel2.Controls.Add(this.label1);
             this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(6, 3, 6, 6);
@@ -221,8 +215,8 @@
             this.dgvList.AllowUserToAddRows = false;
             this.dgvList.AllowUserToDeleteRows = false;
             this.dgvList.AllowUserToResizeRows = false;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.Honeydew;
-            this.dgvList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Honeydew;
+            this.dgvList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -236,17 +230,15 @@
             this.colCode,
             this.colDesc1,
             this.Column4,
-            this.Column5,
-            this.Column6,
             this.Column7});
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.Color.Teal;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvList.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Teal;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvList.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvList.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.dgvList.Location = new System.Drawing.Point(3, 56);
             this.dgvList.Name = "dgvList";
@@ -259,71 +251,14 @@
             this.dgvList.SelectionChanged += new System.EventHandler(this.dgvList_SelectionChanged);
             this.dgvList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvList_KeyDown);
             // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "Id";
-            this.Column1.HeaderText = "Id";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Visible = false;
-            // 
-            // colCode
-            // 
-            this.colCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colCode.DataPropertyName = "Code";
-            this.colCode.HeaderText = "Code";
-            this.colCode.Name = "colCode";
-            this.colCode.ReadOnly = true;
-            this.colCode.Width = 57;
-            // 
-            // colDesc1
-            // 
-            this.colDesc1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colDesc1.DataPropertyName = "Desc1";
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.colDesc1.DefaultCellStyle = dataGridViewCellStyle10;
-            this.colDesc1.HeaderText = "Description 1";
-            this.colDesc1.Name = "colDesc1";
-            this.colDesc1.ReadOnly = true;
-            // 
-            // Column4
-            // 
-            this.Column4.DataPropertyName = "Desc2";
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Column4.DefaultCellStyle = dataGridViewCellStyle11;
-            this.Column4.HeaderText = "Description 2";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            // 
-            // Column5
-            // 
-            this.Column5.DataPropertyName = "Phone";
-            this.Column5.HeaderText = "Phone";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            // 
-            // Column6
-            // 
-            this.Column6.DataPropertyName = "Fax";
-            this.Column6.HeaderText = "Fax";
-            this.Column6.Name = "Column6";
-            this.Column6.ReadOnly = true;
-            // 
-            // Column7
-            // 
-            this.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column7.DataPropertyName = "Address";
-            this.Column7.HeaderText = "Address";
-            this.Column7.Name = "Column7";
-            this.Column7.ReadOnly = true;
-            // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.txtSearch);
             this.panel1.Controls.Add(this.imgExpand);
             this.panel1.Controls.Add(this.lblClear);
+            this.panel1.Controls.Add(this.lblFilter);
             this.panel1.Controls.Add(this.lblRefresh);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.txtSearch);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -353,7 +288,7 @@
             this.lblClear.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblClear.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
             this.lblClear.LinkColor = System.Drawing.Color.Navy;
-            this.lblClear.Location = new System.Drawing.Point(246, 6);
+            this.lblClear.Location = new System.Drawing.Point(209, 6);
             this.lblClear.Name = "lblClear";
             this.lblClear.Size = new System.Drawing.Size(32, 13);
             this.lblClear.TabIndex = 2;
@@ -361,21 +296,66 @@
             this.lblClear.Text = "Clear";
             this.lblClear.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblClear_LinkClicked);
             // 
+            // lblFilter
+            // 
+            this.lblFilter.ActiveLinkColor = System.Drawing.Color.Navy;
+            this.lblFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblFilter.AutoSize = true;
+            this.lblFilter.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblFilter.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.lblFilter.LinkColor = System.Drawing.Color.Navy;
+            this.lblFilter.Location = new System.Drawing.Point(247, 6);
+            this.lblFilter.Name = "lblFilter";
+            this.lblFilter.Size = new System.Drawing.Size(31, 13);
+            this.lblFilter.TabIndex = 1;
+            this.lblFilter.TabStop = true;
+            this.lblFilter.Text = "Filter";
+            this.lblFilter.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // lblRefresh
             // 
             this.lblRefresh.ActiveLinkColor = System.Drawing.Color.Navy;
             this.lblRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblRefresh.AutoSize = true;
+            this.lblRefresh.ContextMenuStrip = this.mnuShow;
             this.lblRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lblRefresh.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
             this.lblRefresh.LinkColor = System.Drawing.Color.Navy;
-            this.lblRefresh.Location = new System.Drawing.Point(195, 5);
+            this.lblRefresh.Location = new System.Drawing.Point(158, 6);
             this.lblRefresh.Name = "lblRefresh";
             this.lblRefresh.Size = new System.Drawing.Size(45, 13);
             this.lblRefresh.TabIndex = 1;
             this.lblRefresh.TabStop = true;
             this.lblRefresh.Text = "Refresh";
             this.lblRefresh.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblRefresh_LinkClicked);
+            // 
+            // mnuShow
+            // 
+            this.mnuShow.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuShowA,
+            this.mnuShowI});
+            this.mnuShow.Name = "contextMenuStrip1";
+            this.mnuShow.Size = new System.Drawing.Size(148, 48);
+            this.mnuShow.Opening += new System.ComponentModel.CancelEventHandler(this.mnuShow_Opening);
+            // 
+            // mnuShowA
+            // 
+            this.mnuShowA.Checked = true;
+            this.mnuShowA.CheckOnClick = true;
+            this.mnuShowA.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.mnuShowA.Name = "mnuShowA";
+            this.mnuShowA.Size = new System.Drawing.Size(147, 22);
+            this.mnuShowA.Text = "Show Active";
+            this.mnuShowA.CheckedChanged += new System.EventHandler(this.mnuShow_CheckedChanged);
+            this.mnuShowA.Click += new System.EventHandler(this.mnuShowA_Click);
+            // 
+            // mnuShowI
+            // 
+            this.mnuShowI.CheckOnClick = true;
+            this.mnuShowI.Name = "mnuShowI";
+            this.mnuShowI.Size = new System.Drawing.Size(147, 22);
+            this.mnuShowI.Text = "Show Inactive";
+            this.mnuShowI.CheckedChanged += new System.EventHandler(this.mnuShow_CheckedChanged);
             // 
             // label3
             // 
@@ -385,19 +365,6 @@
             this.label3.Size = new System.Drawing.Size(40, 13);
             this.label3.TabIndex = 0;
             this.label3.Text = "Search";
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtSearch.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(3, 22);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(296, 30);
-            this.txtSearch.TabIndex = 3;
-            this.txtSearch.TabOnEnter = false;
-            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
-            this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
             // 
             // label4
             // 
@@ -445,23 +412,18 @@
             // 
             // txtNote
             // 
-            this.txtNote.ContextMenuStrip = this.contextMenuStrip1;
+            this.txtNote.ContextMenuStrip = this.mnuShow;
             this.txtNote.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNote.Location = new System.Drawing.Point(15, 168);
+            this.txtNote.Location = new System.Drawing.Point(15, 157);
             this.txtNote.Multiline = true;
             this.txtNote.Name = "txtNote";
             this.txtNote.Size = new System.Drawing.Size(605, 64);
             this.txtNote.TabIndex = 7;
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
             // txtAddress
             // 
             this.txtAddress.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAddress.Location = new System.Drawing.Point(420, 84);
+            this.txtAddress.Location = new System.Drawing.Point(420, 30);
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(200, 50);
@@ -471,7 +433,7 @@
             // 
             this.groupLabel3.Caption = "Note";
             this.groupLabel3.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupLabel3.Location = new System.Drawing.Point(10, 146);
+            this.groupLabel3.Location = new System.Drawing.Point(10, 135);
             this.groupLabel3.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
             this.groupLabel3.Name = "groupLabel3";
             this.groupLabel3.Size = new System.Drawing.Size(610, 16);
@@ -487,25 +449,6 @@
             this.txtDescKH.TabIndex = 3;
             this.txtDescKH.TabOnEnter = true;
             // 
-            // txtFax
-            // 
-            this.txtFax.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFax.Location = new System.Drawing.Point(420, 57);
-            this.txtFax.Name = "txtFax";
-            this.txtFax.Size = new System.Drawing.Size(200, 21);
-            this.txtFax.TabIndex = 5;
-            this.txtFax.TabOnEnter = true;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(385, 60);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(29, 22);
-            this.label14.TabIndex = 0;
-            this.label14.Text = "Fax";
-            // 
             // txtCode
             // 
             this.txtCode.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
@@ -516,20 +459,11 @@
             this.txtCode.TabIndex = 1;
             this.txtCode.TabOnEnter = true;
             // 
-            // txtPhone
-            // 
-            this.txtPhone.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPhone.Location = new System.Drawing.Point(420, 30);
-            this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(200, 21);
-            this.txtPhone.TabIndex = 4;
-            this.txtPhone.TabOnEnter = true;
-            // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(365, 87);
+            this.label13.Location = new System.Drawing.Point(365, 33);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(49, 22);
             this.label13.TabIndex = 0;
@@ -543,16 +477,6 @@
             this.txtDescEN.Size = new System.Drawing.Size(200, 30);
             this.txtDescEN.TabIndex = 2;
             this.txtDescEN.TabOnEnter = true;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(373, 33);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(41, 22);
-            this.label11.TabIndex = 0;
-            this.label11.Text = "Phone";
             // 
             // label2
             // 
@@ -573,6 +497,63 @@
             this.label1.Size = new System.Drawing.Size(72, 22);
             this.label1.TabIndex = 0;
             this.label1.Text = "Description 1";
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSearch.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearch.Location = new System.Drawing.Point(3, 21);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(296, 30);
+            this.txtSearch.TabIndex = 38;
+            this.txtSearch.TabOnEnter = false;
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "Id";
+            this.Column1.HeaderText = "Id";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Visible = false;
+            // 
+            // colCode
+            // 
+            this.colCode.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colCode.DataPropertyName = "code";
+            this.colCode.HeaderText = "Code";
+            this.colCode.Name = "colCode";
+            this.colCode.ReadOnly = true;
+            this.colCode.Width = 57;
+            // 
+            // colDesc1
+            // 
+            this.colDesc1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDesc1.DataPropertyName = "Desc1";
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.colDesc1.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colDesc1.HeaderText = "Description 1";
+            this.colDesc1.Name = "colDesc1";
+            this.colDesc1.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "Desc2";
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Khmer OS", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Column4.DefaultCellStyle = dataGridViewCellStyle3;
+            this.Column4.HeaderText = "Description 2";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            // 
+            // Column7
+            // 
+            this.Column7.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column7.DataPropertyName = "Address";
+            this.Column7.HeaderText = "Address";
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
             // 
             // frmLocationList
             // 
@@ -599,6 +580,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgExpand)).EndInit();
+            this.mnuShow.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -620,7 +602,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
-        private Kredit.UI.TextBox txtSearch;
         private System.Windows.Forms.ToolStripButton btnSaveNew;
         private System.Windows.Forms.LinkLabel lblClear;
         private System.Windows.Forms.LinkLabel lblRefresh;
@@ -631,22 +612,20 @@
         private Kredit.UI.GroupLabel groupLabel3;
         private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.TextBox txtNote;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ContextMenuStrip mnuShow;
         private System.Windows.Forms.ToolStripButton btnActive;
         private System.Windows.Forms.ToolStripButton btnUnlock;
-        private Kredit.UI.TextBox txtFax;
-        private System.Windows.Forms.Label label14;
-        private Kredit.UI.TextBox txtPhone;
-        private System.Windows.Forms.Label label11;
         private Kredit.UI.GroupLabel groupLabel2;
         private Kredit.UI.GroupLabel groupLabel1;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ToolStripMenuItem mnuShowA;
+        private System.Windows.Forms.ToolStripMenuItem mnuShowI;
+        private System.Windows.Forms.LinkLabel lblFilter;
+        private Kredit.UI.TextBox txtSearch;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDesc1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;        
     }
 }

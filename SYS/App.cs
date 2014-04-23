@@ -1,6 +1,6 @@
 ﻿/*TODO:
  * Option to auto switch keyboard to KH when in Unicode box
- * Log in db and file
+ * Loging in db and file
  */
 using System;
 using System.IO;
@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using System.Data;
 using ServiceStack.OrmLite;
 using System.Reflection;
-
+ 
 namespace ERP
 {
     public static class App
@@ -16,7 +16,7 @@ namespace ERP
         public static Setting setting = new Setting();
         public static String version;
 
-        public static void InitApp()
+        public static void Init()
         {
             LoadSettings();
             try
@@ -42,7 +42,7 @@ namespace ERP
             version = Common.RemoveLastDotZero(Assembly.GetEntryAssembly().GetName().Version.ToString());
         }
 
-        public static void LoadSettings()
+        private static void LoadSettings()
         {
             setting.Path = Path.Combine(Application.StartupPath, "setting.ini");
             Database.ConnectionString = setting.Get("ConnectionString", @"server=localhost;database=erp;uid=erp;pwd=erp");
