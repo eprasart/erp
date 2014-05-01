@@ -18,7 +18,7 @@ namespace ERP
                 return s;
         }
 
-        public static void ShowMsg(string msg, string title, MessageBoxButtons buttons = MessageBoxButtons.OK, MessageBoxIcon icon = MessageBoxIcon.Information)
+        public static void ShowMsg(string msg, string title = "", MessageBoxButtons buttons = MessageBoxButtons.OK, MessageBoxIcon icon = MessageBoxIcon.Information)
         {
             var fMsg = new frmMsg(msg);
             fMsg.Title = title;

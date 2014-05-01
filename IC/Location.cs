@@ -45,7 +45,7 @@ namespace ERP
         public static DataTable GetDataTable(string filter = "", string status = "")
         {
             var sql = "select id, code, desc1, desc2, address from ic_location where 1 = 1";
-            if (status.Length > 0) 
+            if (status.Length > 0)
                 sql += " and status = '" + status + "'";
             if (filter.Length > 0)
                 sql += " and (code ~* :filter or desc1 ~* :filter or desc2 ~* :filter or address ~* :filter or note ~* :filter)";
@@ -91,7 +91,7 @@ namespace ERP
         }
 
         public static Location Select(long Id)
-        {            
+        {
             return Database.Connection.SingleById<Location>(Id);
         }
 
@@ -127,6 +127,11 @@ namespace ERP
             if (Id == 0) return;
             DateTime ts = Database.GetCurrentTimeStamp();
             Database.Connection.UpdateOnly(new Location { LockBy = null }, p => p.LockBy, p => p.Id == Id);
+        }
+
+        public static bool IsExist(string Code, long Id = 0)
+        {
+            return Database.Connection.Exists<Location>("Id <> @Id and Code = @Code", new { Id = Id, Code = Code });
         }
     }
 }

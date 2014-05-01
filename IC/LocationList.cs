@@ -92,10 +92,18 @@ namespace ERP
 
         private bool IsValidated()
         {
-            if (txtCode.Text.Trim().Length == 0)
+            string Code=txtCode.Text.Trim();
+            if (Code.Length == 0)
             {
                 Common.ShowMsg("Code cannot be empty.", "Save");
                 txtCode.Focus();
+                return false;
+            }
+            if (LocationFacade.IsExist(Code, Id))
+            {
+                Common.ShowMsg("Code already exists. Code must be unique.", "Save");
+                txtCode.Focus();
+                txtCode.SelectAll();
                 return false;
             }
             //todo: prevent duplicate
@@ -149,11 +157,11 @@ namespace ERP
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (!IsValidated()) return;
+            if (!IsValidated()) return;            
             Cursor = Cursors.WaitCursor;
             var m = new Location();
             m.Id = Id;
-            m.Code = txtCode.Text;
+            m.Code = txtCode.Text.Trim();
             m.Desc1 = txtDescEN.Text;
             m.Desc2 = txtDescKH.Text;
             m.Address = txtAddress.Text;
