@@ -16,14 +16,14 @@ namespace ERP
 
         public static void PrepareDatabase()
         {
-            Connection.CreateTableIfNotExists(typeof(Location));
+            Connection.CreateTableIfNotExists(typeof(Location), typeof(User));
             //db.CreateTableIfNotExists<Vendor>();
             //db.CreateTableIfNotExists<Location>();
         }
 
         public static DateTime GetCurrentTimeStamp()
         {
-            return Connection.Scalar <DateTime>("select now()");
+            return Connection.Scalar<DateTime>("select now()");
         }
     }
 }

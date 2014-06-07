@@ -86,6 +86,13 @@
     <Compile Include="IC\LocationList.Designer.cs">
       <DependentUpon>LocationList.cs</DependentUpon>
     </Compile>
+    <Compile Include="SM\User.cs" />
+    <Compile Include="SM\UserList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SM\UserList.Designer.cs">
+      <DependentUpon>UserList.cs</DependentUpon>
+    </Compile>
     <Compile Include="SYS\Msg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +116,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="IC\LocationList.resx">
       <DependentUpon>LocationList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SM\UserList.resx">
+      <DependentUpon>UserList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SYS\Msg.resx">
       <DependentUpon>Msg.cs</DependentUpon>
