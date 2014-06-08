@@ -17,6 +17,19 @@ namespace ERP
         [Required]
         public string Username { get; set; }
         public string FullName { get; set; }
+        public string Pwd { get; set; }
+        public DateTime PwdChangeOn { get; set; }
+        public string PwdChangeForce { get; set; }
+        public int TimeLevel { get; set; }        
+        public string StartOn { get; set; }
+        public string EndOn { get; set; }
+        public int Success { get; set; }
+        public int Fail { get; set; }
+        public string Locked { get; set; }
+        public string Right { get; set; }        
+        public string SecurityNo { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
         public string Note { get; set; }
         public String Status { get; set; }
         public string LockBy { get; set; }
