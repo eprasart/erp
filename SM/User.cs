@@ -18,18 +18,18 @@ namespace ERP
         public string Username { get; set; }
         public string FullName { get; set; }
         public string Pwd { get; set; }
-        public DateTime PwdChangeOn { get; set; }
-        public string PwdChangeForce { get; set; }
-        public int TimeLevel { get; set; }        
-        public string StartOn { get; set; }
-        public string EndOn { get; set; }
+        public DateTime? PwdChangeOn { get; set; }
+        public bool PwdChangeForce { get; set; }
+        public int TimeLevel { get; set; }
+        public DateTime? StartOn { get; set; }
+        public DateTime? EndOn { get; set; }
         public int Success { get; set; }
         public int Fail { get; set; }
-        public string Locked { get; set; }
-        public string Right { get; set; }        
+        public bool Locked { get; set; }
+        public string Right { get; set; }
         public string SecurityNo { get; set; }
-        public string Email { get; set; }
         public string Phone { get; set; }
+        public string Email { get; set; }
         public string Note { get; set; }
         public String Status { get; set; }
         public string LockBy { get; set; }
@@ -54,11 +54,11 @@ namespace ERP
 
         public static DataTable GetDataTable(string filter = "", string status = "")
         {
-            var sql = "select id, username, full_name, note from sm_user where 1 = 1";
+            var sql = "select id, username, full_name, phone, email from sm_user where 1 = 1";
             if (status.Length > 0)
                 sql += " and status = '" + status + "'";
             if (filter.Length > 0)
-                sql += " and (username ~* :filter or full_name ~* :filter or note ~* :filter)";
+                sql += " and (username ~* :filter or full_name ~* :filter or phone ~* :filter or email ~* :filter or note ~* :filter)";
             sql += "\norder by username";
             var cmd = new NpgsqlCommand(sql, new NpgsqlConnection(Database.ConnectionString));
             if (filter.Length > 0)
@@ -73,24 +73,19 @@ namespace ERP
         {
             DateTime? ts = Database.GetCurrentTimeStamp();
             long seq = 0;   // New inserted sequence
-            var mSave = new User
-            {
-                Username = m.Username,
-                FullName = m.FullName,
-                Note = m.Note,
-            };
             if (m.Id == 0)
             {
-                mSave.Status = StatusType.Active;
-                mSave.InsertBy = Login.Username;
-                mSave.InsertAt = ts;
-                seq = Database.Connection.Insert(mSave, true);
+                m.Status = StatusType.Active;
+                m.InsertBy = Login.Username;
+                m.InsertAt = ts;
+                seq = Database.Connection.Insert(m, true);
             }
             else
             {
-                mSave.ChangeBy = Login.Username;
-                mSave.ChangeAt = ts;
-                Database.Connection.UpdateOnly(mSave, p => new { p.Username, p.FullName, p.Note, ChangeBy = p.ChangeBy, ChangeAt = p.ChangeAt },
+                m.ChangeBy = Login.Username;
+                m.ChangeAt = ts;
+
+                Database.Connection.UpdateOnly(m, p => new { p.Username, p.FullName, p.Phone, p.Email, p.Note, ChangeBy = p.ChangeBy, ChangeAt = p.ChangeAt },
                     p => p.Id == m.Id);
                 // If record is lock then unlock
                 if (IsLocked(m.Id)) ReleaseLock(m.Id);

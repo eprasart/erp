@@ -92,18 +92,18 @@ namespace ERP
 
         private bool IsValidated()
         {
-            string Code=txtCode.Text.Trim();
+            string Code = txtUsernane.Text.Trim();
             if (Code.Length == 0)
             {
                 Common.ShowMsg("Code cannot be empty.", "Save");
-                txtCode.Focus();
+                txtUsernane.Focus();
                 return false;
             }
-            if (LocationFacade.IsExist(Code, Id))
+            if (UserFacade.IsExist(Code, Id))
             {
                 Common.ShowMsg("Code already exists. Code must be unique.", "Save");
-                txtCode.Focus();
-                txtCode.SelectAll();
+                txtUsernane.Focus();
+                txtUsernane.SelectAll();
                 return false;
             }
             //todo: prevent duplicate
@@ -114,19 +114,22 @@ namespace ERP
         {
             var Id = dgvList.Id;
             if (Id == 0) return;
-            var m = LocationFacade.Select(Id);
-            txtCode.Text = m.Code;
-            txtDescEN.Text = m.Desc1;
-            txtDescKH.Text = m.Desc2;
-            txtAddress.Text = m.Address;
+            var m = UserFacade.Select(Id);
+            txtUsernane.Text = m.Username;
+            txtFullName.Text = m.FullName;
+            txtPhone.Text = m.Phone;
+            txtEmail.Text = m.Email;
+            txtPwd.Text = m.Pwd;
+            dtpStart.Checked = (m.StartOn != null);
+            if (dtpStart.Checked) dtpStart.Value = (DateTime)m.StartOn;
+            dtpEnd.Checked = (m.EndOn != null);
+            if (dtpEnd.Checked) dtpEnd.Value = (DateTime)m.EndOn;
             txtNote.Text = m.Note;
-
             SetStatus(m.Status);
-
             LockControls();
         }
 
-        private void frmLocationList_Load(object sender, EventArgs e)
+        private void frmUserList_Load(object sender, EventArgs e)
         {
             App.Init();
 
@@ -142,11 +145,12 @@ namespace ERP
         private void btnNew_Click(object sender, EventArgs e)
         {
             if (isExpand) picExpand_Click(sender, e);
-            txtCode.Text = "";
-            txtCode.Focus();
-            txtDescEN.Text = "";
-            txtDescKH.Text = "";            
-            txtAddress.Text = "";
+            txtUsernane.Text = "";
+            txtUsernane.Focus();
+            txtFullName.Text = "";
+            txtPwd.Text = "";
+            txtPhone.Text = "";
+            txtEmail.Text = "";
             txtNote.Text = "";
             if (dgvList.RowCount > 0)
                 dgvList.CurrentRow.Selected = false;
@@ -157,16 +161,17 @@ namespace ERP
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (!IsValidated()) return;            
+            if (!IsValidated()) return;
             Cursor = Cursors.WaitCursor;
-            var m = new Location();
+            var m = new User();
             m.Id = Id;
-            m.Code = txtCode.Text.Trim();
-            m.Desc1 = txtDescEN.Text;
-            m.Desc2 = txtDescKH.Text;
-            m.Address = txtAddress.Text;
+            m.Username = txtUsernane.Text.Trim();
+            m.FullName = txtFullName.Text;
+            m.Pwd = txtPwd.Text;
+            m.Phone = txtPhone.Text;
+            m.Email = txtEmail.Text;
             m.Note = txtNote.Text;
-            long seq = LocationFacade.Save(m);
+            long seq = UserFacade.Save(m);
             if (dgvList.RowCount > 0) rowIndex = dgvList.CurrentRow.Index;
             RefreshGrid(seq);
             LockControls();
@@ -212,7 +217,7 @@ namespace ERP
             if (Id == 0) return;
 
             // If locked
-            var lInfo = LocationFacade.GetLockInfo(Id);
+            var lInfo = UserFacade.GetLockInfo(Id);
             string msg = "";
             if (lInfo.IsLocked)
             {
@@ -224,7 +229,7 @@ namespace ERP
             msg = "Are you sure you want to delete?";
             if (MessageBox.Show(msg, "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.No)
                 return;
-            LocationFacade.SetStatus(Id, StatusType.Deleted);
+            UserFacade.SetStatus(Id, StatusType.Deleted);
             RefreshGrid();
             if (dgvList.RowCount == 0) btnNew_Click(sender, e);
         }
@@ -232,7 +237,7 @@ namespace ERP
         private void btnCopy_Click(object sender, EventArgs e)
         {
             Id = 0;
-            txtCode.Focus();
+            txtUsernane.Focus();
             LockControls(false);
         }
 
@@ -261,7 +266,7 @@ namespace ERP
             dgvList_SelectionChanged(sender, e);    // reload data since SelectionChanged will not occured on current row
         }
 
-        private void frmLocationList_FormClosed(object sender, FormClosedEventArgs e)
+        private void frmUserList_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (btnUnlock.Text == "Cance&l")
                 btnUnlock_Click(null, null);
@@ -272,7 +277,7 @@ namespace ERP
         {
             var Id = dgvList.Id;
             if (Id == 0) return;
-            var lInfo = LocationFacade.GetLockInfo(Id);
+            var lInfo = UserFacade.GetLockInfo(Id);
             if (lInfo.IsLocked)
             {
                 string msg = "Account is currently locked by '" + lInfo.LockBy + "' since '" + lInfo.LockAt + "'" +
@@ -280,7 +285,7 @@ namespace ERP
                 new frmMsg(msg).ShowDialog();
                 return;
             }
-            LocationFacade.SetStatus(Id, btnActive.Text.StartsWith("I") ? StatusType.InActive : StatusType.Active);
+            UserFacade.SetStatus(Id, btnActive.Text.StartsWith("I") ? StatusType.InActive : StatusType.Active);
             RefreshGrid();
         }
 
@@ -297,7 +302,7 @@ namespace ERP
                 }
                 LockControls(true);
                 //dgvList.CurrentCell = dgvList[1, rowIndex];
-                LocationFacade.ReleaseLock(dgvList.Id);
+                UserFacade.ReleaseLock(dgvList.Id);
                 if (dgvList.RowCount > 0 && !dgvList.CurrentRow.Selected)
                     dgvList.CurrentRow.Selected = true;
                 return;
@@ -305,7 +310,7 @@ namespace ERP
 
             // Unlock
             if (Id == 0) return;
-            var lInfo = LocationFacade.GetLockInfo(Id);
+            var lInfo = UserFacade.GetLockInfo(Id);
 
             if (lInfo.IsLocked) // Check if record is locked
             {
@@ -314,7 +319,7 @@ namespace ERP
                 return;
             }
             LockControls(false);
-            LocationFacade.Lock(dgvList.Id);
+            UserFacade.Lock(dgvList.Id);
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)

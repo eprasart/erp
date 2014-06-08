@@ -134,16 +134,16 @@
   <data name="btnUnlock.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIhSURBVDhPtZK9b1JRGMYxxtHBxMHZP0GSDgxuDgYmAgMh
-        cXJS0kgTJXEA0g7FgAmkCySgTO0lfAXuNSXIUJUoJZGAaSnYWgy0VWiBy/fly8dz8RajEGNi/CXvcJ9z
-        nue87zlX9F+QSqVXHA7HvTBNO/1+v9NqtWpkMtlVYfnPrKys3jwsFMrF0hEOC5+xf/AJe/mPSCQSlcXF
-        pVvCtvkolcprxycn1ddv4t+CwWDSaDQ+NBgMD7w+39ZuNof423d1uVx+Xdg+i8fn05eOjrG+7nklkUgu
-        C7JILBZf2tigQjvZPZhMJosgz5LY3n6R3z+AVqu9I0hTNBrN7RwZxeVyxcnnhR/qb9jW1pZdz91htVp9
-        Q5CmKBSKhWwuj2dud5qMelGQ/x6VSrWws5uF3enKzA2gKOpuLBaznVc0Gp1WJBLhNU+xWJq8hs1muy/Y
-        fpJKpejxeIzRaIThcIjBYIBGowGWbaDX66HT7aLd7qDZaiESeblFLL/eAx8wHI4wIOZ+fwCO68NgXIZe
-        b0S700Gr1Uaj2ZwEko5mA96TAP5Urt8nJ3LodnuwWJ7CbLag2WyBJd3U6yyqtRqYzc3ZgGQySXMcMfLt
-        dvh229DpdNA90qHOsqjV6jirVlE5PQPDMPMDzudskTn5djOZD0inM8RYwykxlisVfPlaBk3PCbDb7Y9D
-        oTATDIUY8htPKhAIMF6vd1oUxRfFPDGbVwXbvyISfQdt4Y2hw/0KNAAAAABJRU5ErkJggg==
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIiSURBVDhPtZK9b1JRGMYxxtHBxMHZP0GSDgxuDgYmAgMh
+        cXJS0oiJkjgU0g7FgAmkCySgTO0lfAXuNSXI0GqjlEQCpqVgazHQVqEFLlw+Ll8+nou3GIUYE+MveYf7
+        nPM8533PuZL/glwuv+J0Ou9FaNoVCARcNptNp1AororLf2ZpafnmYaFQLpaOcFj4jP2DT9jLf0QikajM
+        zz+8JW6bjVqtvnZ8clLdfP3mWygUSppMpkdGo/GBz+/f2M3msPX2XV2pVF4Xt0/j9fsXSkfHWF31bspk
+        ssuiLJFKpZfW1qjwTnYPZrPZKsrTJLa3X+b3D6DX6++I0gSdTnc7R0Zxu91b5PPCD/U37Csri+4XnohW
+        q70hShNUKtVcNpfHc48nTUa9KMp/j0ajmdvZzcLhcmdmBlAUdTcej9vPKxaLTSoajQqat1gsjV/Dbrff
+        F20/SaVS9Gg0wnA4xGAwQL/fR6PRAMs20O120e500Gq10eQ4RKOvNojl13sQAgaDIfrE3Ov1wfM9GE2L
+        WFgwodVug+NaaDSb40DS0XTAexIgnMr3euREHp1OF1brM1gsVjSbHFjSTb3OolqrgVlfnw5IJpM0zxOj
+        0G5baLcFg8EAw2MD6iyLWq2Os2oVldMzMAwzO+B8To7MKbSbyXxAOp0hxhpOibFcqeDL1zJoekaAw+F4
+        Eg5HmFA4zJDfeFzBYJDx+XyToiihKOapxbIs2v4VieQ7ZDyNnvOYT6UAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="btnActive.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -168,7 +168,7 @@
   <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="colCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="colUsername.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="Column4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
